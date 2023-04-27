@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d6ec5cbd148c415481057a57d1dee7e9" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.AnimalShelter" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Application" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Client" Width="1.5" PointX="1.5" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ExecutedApplication" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Gender" Width="1.5" PointX="1.5" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Pet" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PhotoPath" Width="1.5" PointX="3.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.StatusApplication" Width="1.5" PointX="1.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="2.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Tutor" Width="1.5" PointX="8.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TypePet" Width="1.5" PointX="1.5" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.VW_ApplicationYear" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.VW_PetTutor" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_ExecutedApplication_AnimalShelter" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Tutor_AnimalShelter" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Application_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Application_StatusApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Application_TypePet" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ExecutedApplication_Application" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Client_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ExecutedApplication_Pet" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Pet_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Pet_PhotoPath" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Pet_TypePet" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.AnimalShelterPet" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.TutorPet" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.SizePet" Width="1.5" PointX="3.75" PointY="10.75" />
+        <EntityTypeShape EntityType="Model.StatusClient" Width="1.5" PointX="10.375" PointY="0.875" />
+        <AssociationConnector Association="Model.FK_Client_StatusClient" />
+        <AssociationConnector Association="Model.FK_Pet_SizePet" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
