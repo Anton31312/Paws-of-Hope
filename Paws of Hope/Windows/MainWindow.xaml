@@ -12,7 +12,7 @@
         ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>   
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -25,30 +25,131 @@
 
         <Border Background="#01CBFC"
                 Grid.ColumnSpan="3"/>
-        <Image Source="C:\Users\Anton\source\repos\Paws of Hope\Paws of Hope\Resourse\Logo.png"
+        <Image Source="..\Resourse\Logo.png"
                Grid.Column="0"
                Width="120"
                Height="96"
                HorizontalAlignment="Left"
                Margin="40 0 0 0"/>
         <StackPanel Grid.Column="2"
-                    Orientation="Horizontal">
-            <TextBlock Text="{Binding GetTutor}"
+                    VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 30 0">
+                <TextBlock Text="{Binding GetTutor}"
                        Style="{DynamicResource txtStyle}"
                        VerticalAlignment="Center"
                        FontSize="28"
                        FontWeight="Bold"
                        Foreground="#ffffff">
-                <TextBlock.Effect>
-                    <DropShadowEffect RenderingBias="Quality" 
+                    <TextBlock.Effect>
+                        <DropShadowEffect RenderingBias="Quality" 
                                       ShadowDepth="3" 
                                       BlurRadius="3"/>
-                </TextBlock.Effect>
-            </TextBlock>
-            <Image Source="C:\Users\Anton\source\repos\Paws of Hope\Paws of Hope\Resourse\Photo.png"
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Image Source="..\Resourse\Photo.png"
                    Height="87"
                    Width="87"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                         Margin="0 20 30 0"
+                        HorizontalAlignment="Right"
+                        Cursor="Hand">
+                <TextBlock Text="Выход"
+                           x:Name="txtExit"
+                       Style="{DynamicResource txtStyle}"
+                       VerticalAlignment="Center"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="#ffffff"
+                           MouseUp="txtExit_MouseUp">
+                    <TextBlock.Effect>
+                        <DropShadowEffect RenderingBias="Quality" 
+                                      ShadowDepth="3" 
+                                      BlurRadius="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Image Source="..\Resourse\HelpImage\doorexit.png"
+                   Height="33"
+                   Width="32"
+                       Margin="10 0 0 0"/>
+            </StackPanel>
         </StackPanel>
-        
+
+
+        <TextBlock Text="Кошки"
+                   Style="{DynamicResource txtStyle}"
+                   FontSize="48"
+                   x:Name="txtCatWin"
+                   FontWeight="Medium" 
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center" 
+                   Margin="153,91,174,106" 
+                   Grid.Row="1"
+                   Cursor="Hand"
+                   MouseUp="txtCatWin_MouseUp"/>
+        <Image Source="..\Resourse\Animal\cat lying on books.png"
+               Width="497"
+               Height="417" 
+               Grid.ColumnSpan="2" 
+               Margin="93,191,366,157"
+               Grid.Row="1" 
+               Grid.RowSpan="3"/>
+
+
+        <TextBlock Text="Клиенты"
+                   Style="{DynamicResource txtStyle}"
+                   FontSize="48"
+                   x:Name="txtClientWin"
+                   FontWeight="Medium" 
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center" 
+                   Grid.Row="1"
+                   Grid.Column="1" 
+                   Margin="139,48,141,150"
+                   Cursor="Hand"
+                   MouseUp="txtClientWin_MouseUp"/>
+        <TextBlock Text="Заявки"
+                   Style="{DynamicResource txtStyle}"
+                   FontSize="48"
+                   x:Name="txtAppWin"
+                   FontWeight="Medium" 
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center" 
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   Margin="158,106,162,92"
+                   Cursor="Hand"
+                   MouseUp="txtAppWin_MouseUp"/>
+        <Image Source="..\Resourse\Animal\man and pregnant woman.png"
+               Width="277"
+               Height="434" 
+               Grid.ColumnSpan="2" 
+               Margin="29,174,430,174"
+               Grid.Row="1" 
+               Grid.RowSpan="3" 
+               Grid.Column="1"/>
+
+        <TextBlock Text="Собаки"
+                   Style="{DynamicResource txtStyle}"
+                   FontSize="48"
+                   x:Name="txtDogWin"
+                   FontWeight="Medium" 
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Grid.Row="1"
+                   Grid.Column="2"
+                   Cursor="Hand" 
+                   Margin="130,91,182,106"
+                   MouseUp="txtDogWin_MouseUp"/>
+        <Image Source="..\Resourse\Animal\dog in pink dressing sitting.png"
+               Width="292"
+               Height="372" 
+               Margin="130,191,56,202"
+               Grid.Row="1" 
+               Grid.RowSpan="3" 
+               Grid.Column="2"/>
+
     </Grid>
 </Window>

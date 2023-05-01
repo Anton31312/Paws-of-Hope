@@ -1,0 +1,241 @@
+﻿<Window x:Class="Paws_of_Hope.Windows.ApplicationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Paws_of_Hope.Windows"
+        mc:Ignorable="d"
+        Title="Paws of Hope" 
+        Height="1024" 
+        Width="1440"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--Frame for search-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Background="#01CBFC"
+                    Grid.RowSpan="6"/>
+            <Image Source="..\Resourse\Logo.png"
+                   Width="120"
+                   Height="96"
+                   x:Name="txtBackMainWin"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Cursor="Hand"
+                   MouseUp="txtBackMainWin_MouseUp"/>
+
+            <StackPanel Grid.Row="1"
+                        VerticalAlignment="Bottom"
+                        Margin="0 0 0 20">
+                <TextBlock Text="Поиск"
+                           Style="{DynamicResource txtStyle}"
+                           FontSize="32"
+                           FontWeight="SemiBold"
+                           Margin="40 0 0 0"
+                           Foreground="#ffffff"/>
+                <TextBox x:Name="tbSearch"
+                         Style="{DynamicResource txtRound}"
+                         Height="58"
+                         Width="286"
+                         BorderThickness="2"
+                         BorderBrush="#000000"
+                         GotFocus="tbSearch_GotFocus"
+                         LostFocus="tbSearch_LostFocus"
+                         Text="Введите тип\ФИО клиента"
+                         Tag="Введите тип\ФИО клиента"
+                         TextWrapping="Wrap"
+                         TextAlignment="Left"
+                         FontSize="18"
+                         Foreground="LightGray"
+                         VerticalContentAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2"
+                        Grid.RowSpan="3"
+                        Orientation="Vertical">
+                <StackPanel Margin="0 10 0 0">
+                    <TextBlock Text="Пол"
+                           Style="{DynamicResource txtStyle}"
+                           FontSize="32"
+                           FontWeight="SemiBold"
+                           Margin="40 0 0 0"
+                           Foreground="#ffffff"/>
+                    <ComboBox x:Name="cbGender"
+                         Style="{DynamicResource cbRound}"
+                         Height="58"
+                         Width="286"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 10 0 0">
+                    <TextBlock Text="Возраст"
+                           Style="{DynamicResource txtStyle}"
+                           FontSize="32"
+                           FontWeight="SemiBold"
+                           Margin="40 0 0 0"
+                           Foreground="#ffffff"/>
+                    <ComboBox x:Name="cbAge"
+                         Style="{DynamicResource cbRound}"
+                         Height="58"
+                         Width="286"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 10 0 0">
+                    <TextBlock Text="Статус"
+                           Style="{DynamicResource txtStyle}"
+                           FontSize="32"
+                           FontWeight="SemiBold"
+                           Margin="40 0 0 0"
+                           Foreground="#ffffff"/>
+                    <ComboBox x:Name="cbStatusClient"
+                         Style="{DynamicResource cbRound}"
+                         Height="58"
+                         Width="286"/>
+                </StackPanel>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Cursor="Hand"
+                        Grid.Row="6">
+                <TextBlock Text="Выход"
+                           x:Name="txtExit"
+                           Style="{DynamicResource txtStyle}"
+                           VerticalAlignment="Center"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="#ffffff"
+                           MouseUp="txtExit_MouseUp">
+                    <TextBlock.Effect>
+                        <DropShadowEffect RenderingBias="Quality" 
+                                      ShadowDepth="3" 
+                                      BlurRadius="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Image Source="..\Resourse\HelpImage\doorexit.png"
+                   Height="33"
+                   Width="32"
+                       Margin="10 0 0 0"/>
+            </StackPanel>
+        </Grid>
+
+        <!--Main frame, for table-->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Заявки"
+                       Style="{DynamicResource txtStyle}"
+                       FontSize="48"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center"
+                       Margin="40 0 0 0"/>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 30 0"
+                        VerticalAlignment="Center">
+                <Button x:Name="btnAdd"
+                        Style="{DynamicResource AddButtons}"
+                        Height="58"
+                        Width="302"
+                        Content="Добавить заявку"
+                        Click="btnAdd_Click"/>
+            </StackPanel>
+
+            <ListView Grid.Row="1"
+                      x:Name="listApplicationClient"
+                      MouseDoubleClick="listApplicationClient_MouseDoubleClick">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#1da1f2"
+                            Height="100"
+                            Width="945"
+                            Margin="5"
+                            CornerRadius="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image x:Name="photoBook"
+                                   Height="80">
+                                    <Image.Source>
+                                        <Binding Path ="Photo">
+                                            <Binding.TargetNullValue>
+                                                <ImageSource>/Resourse/nophoto.jpg</ImageSource>
+                                            </Binding.TargetNullValue>
+                                        </Binding>
+                                    </Image.Source>
+                                </Image>
+
+                                <StackPanel Grid.Column="1"
+                                        Margin="0 10 10 0"
+                                        Grid.ColumnSpan="2">
+                                    <TextBlock Margin="0 0 0 5"
+                                           Text="{Binding GetTitle}"
+                                           HorizontalAlignment="Right"
+                                           FontSize="12"/>
+
+                                    <TextBlock Margin="0 0 0 5"
+                                           Text="{Binding GetAuthor}"
+                                           HorizontalAlignment="Right"
+                                           FontSize="12"/>
+
+                                    <TextBlock Margin="0 0 0 5"
+                                           Text="{Binding GetPublishHouse}"
+                                           HorizontalAlignment="Right"
+                                           FontSize="12"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="3"
+                            Margin="0 10 10 0"
+                                        Grid.ColumnSpan="2">
+
+                                    <TextBlock Margin="0 0 0 5"
+                           Text="{Binding GetSection}"
+                           HorizontalAlignment="Right"
+                                           FontFamily="Helvetica"
+                                Foreground="#ffffff"
+                               FontSize="12"/>
+
+                                    <TextBlock Margin="0 0 0 5"
+                                           Text="{Binding GetCost}"
+                                           HorizontalAlignment="Right"
+                                           FontSize="12"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <TextBlock Text="3 из 100"
+                       Grid.Row="2"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="20"
+                       Margin="0 0 40 0"
+                       FontWeight="Regular"
+                       Style="{DynamicResource txtStyle}"/>
+        </Grid>
+
+    </Grid>
+</Window>

@@ -67,7 +67,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Windows\TestBorderForListWindow.xaml.cs">
+      <DependentUpon>TestBorderForListWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Windows\ApplicationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AuthWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,13 +181,29 @@
     <Compile Include="EF\VW_PetTutor.cs">
       <DependentUpon>ModelPawsofHope.tt</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ApplicationWindow.xaml.cs">
+      <DependentUpon>ApplicationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AuthWindow.xaml.cs">
       <DependentUpon>AuthWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CatWindow.xaml.cs">
+      <DependentUpon>CatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ClientWindow.xaml.cs">
+      <DependentUpon>ClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DogWindow.xaml.cs">
+      <DependentUpon>DogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\TestBorderForListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -223,6 +258,11 @@
       <DependentUpon>ModelPawsofHope.edmx</DependentUpon>
       <LastGenOutput>ModelPawsofHope.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resourse\nophoto.jpg" />
+    <Resource Include="Resourse\Animal\cat lying on books.png" />
+    <Resource Include="Resourse\Animal\dog in pink dressing sitting.png" />
+    <Resource Include="Resourse\Animal\man and pregnant woman.png" />
+    <Resource Include="Resourse\HelpImage\doorexit.png" />
     <Resource Include="Resourse\Photo.png" />
     <Resource Include="Resourse\Logo.png" />
     <Resource Include="Resourse\IconLogo.ico" />

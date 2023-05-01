@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Paws_of_Hope.Class;
+using Paws_of_Hope.Windows;
 
 namespace Paws_of_Hope
 {
@@ -23,6 +25,41 @@ namespace Paws_of_Hope
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void txtExit_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            AuthWindow authWindow = new AuthWindow();
+            authWindow.Show();
+            this.Close();
+        }
+
+        private void txtCatWin_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            CatWindow catWindow = new CatWindow();
+            catWindow.Show();
+            this.Close();
+        }
+
+        private void txtClientWin_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            ClientWindow clientWindow = new ClientWindow();
+            clientWindow.Show();
+            this.Close();
+        }
+
+        private void txtAppWin_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            ApplicationWindow applicationWindow = new ApplicationWindow();
+            applicationWindow.Show();
+            this.Close();
+        }
+
+        private void txtDogWin_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            DogWindow dogWindow = new DogWindow();
+            dogWindow.Show();
+            this.Close();
         }
     }
 }

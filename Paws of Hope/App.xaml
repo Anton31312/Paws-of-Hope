@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:Paws_of_Hope"
              StartupUri="Windows/AuthWindow.xaml">
     <Application.Resources>
-        <!--Стиль Button-->
+        <!--#region Button's style-->
+        <!--Style for MainButton's-->
         <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -53,7 +54,112 @@
             </Setter>
         </Style>
 
-        <!--Стиль ListView-->
+        <!--Style for AddButton's-->
+        <Style x:Key="AddButtons" TargetType="{x:Type Button}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="grid">
+                            <Border x:Name="border" CornerRadius="30" Background="#35DB1A">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          TextElement.FontWeight="Normal">
+                                </ContentPresenter>
+                            </Border>
+
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#35DB1A" Offset="1"/>
+                                            <GradientStop Color="#ffffff" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#000000"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--Style for DeleteButton's-->
+        <Style x:Key="DeleteButtons" TargetType="{x:Type Button}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="grid">
+                            <Border x:Name="border" CornerRadius="30" Background="#EB3811">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          TextElement.FontWeight="Normal">
+                                </ContentPresenter>
+                            </Border>
+
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#EB3811" Offset="1"/>
+                                            <GradientStop Color="#ffffff" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#000000"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
+        
+        <!--Style ListView-->
         <Style x:Key="ColorListView" TargetType="GridViewColumnHeader">
             <Setter Property="Background" Value="#657786"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -82,7 +188,7 @@
         </Style>
 
 
-        <!--Стиль TextBox-->
+        <!--Style TextBox-->
         <Style x:Key="txtRound" TargetType="{x:Type TextBox}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
             <Setter Property="BorderThickness" Value="2"/>
@@ -128,7 +234,7 @@
             </Style.Triggers>
         </Style>
 
-        <!--Стиль PasswordBox-->
+        <!--Style PasswordBox-->
         <Style x:Key="pbRound" TargetType="{x:Type PasswordBox}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
             <Setter Property="BorderThickness" Value="2"/>
@@ -174,7 +280,37 @@
             </Style.Triggers>
         </Style>
 
-        <!--Стиль TextBlock-->
+        <!--Style ComboBox-->
+        <Style x:Key="cbRound" TargetType="{x:Type ComboBox}">
+            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="FontFamily" Value="Montserrat"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border BorderBrush="#000000" BorderThickness="2" CornerRadius="20">
+                                <Grid>
+                                    <ToggleButton x:Name="ToggleButton" Template="{DynamicResource ComboBoxToggleButton}" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press">
+                                    </ToggleButton>
+                                    <ContentPresenter x:Name="ContentSite" IsHitTestVisible="False"/>
+                                    <Popup x:Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+                                        <Grid x:Name="DropDown" SnapsToDevicePixels="True">
+                                            <Border CornerRadius="20" Background="#ffffff" BorderBrush="#000000" BorderThickness="2"/>
+                                            <ScrollViewer SnapsToDevicePixels="True">
+                                                <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                            </ScrollViewer>
+                                        </Grid>
+                                    </Popup>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--Style TextBlock-->
         <Style x:Key="txtStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontFamily" Value="Montserrat"/>
             <Setter Property="Foreground" Value="#000000"/>
