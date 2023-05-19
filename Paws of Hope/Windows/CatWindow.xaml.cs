@@ -1,4 +1,5 @@
 ﻿using Paws_of_Hope.Class;
+using Paws_of_Hope.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +21,112 @@ namespace Paws_of_Hope.Windows
     /// </summary>
     public partial class CatWindow : Window
     {
+        List<Pet> petList = new List<Pet>();
+        List<string> listAnimalShleter = new List<string>()
+        {
+            "По умолчанию",
+            "По возрастанию",
+            "По убыванию"
+        };
+
+        List<string> listGender = new List<string>()
+        {
+            "По умолчанию",
+            "Мужской",
+            "Женский"
+        };
+
+        List<string> listAge = new List<string>()
+        {
+            "По умолчанию",
+            "Молодой",
+            "Взрослый",
+            "Старый"
+        };
+
         public CatWindow()
         {
             InitializeComponent();
+
+            cbShelter.ItemsSource = listAnimalShleter;
+            cbShelter.SelectedIndex = 0;
+
+            cbGender.ItemsSource = listGender;
+            cbGender.SelectedIndex = 0;
+
+            cbAge.ItemsSource = listAge;
+            cbAge.SelectedIndex = 0;
+
+            Filter();
+        }
+
+        private void Filter()
+        {
+            petList = AppDate.Context.Pet.Where(i => i.IsActive == true & i.IDTypePet == 2).ToList();
+            petList = petList.Where(i => i.NamePet.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+
+            switch (cbShelter.SelectedIndex)
+            {
+                case 0:
+                    petList = petList.OrderBy(i => i.IDPet).ToList();
+                    break;
+                case 1:
+                    petList = petList.OrderBy(i => i.AnimalShelter).ToList();
+                    break;
+                case 2:
+                    petList = petList.OrderByDescending(i => i.AnimalShelter).ToList();
+                    break;
+                default:
+                    petList = petList.OrderBy(i => i.IDPet).ToList();
+                    break;
+            }
+
+            switch (cbGender.SelectedIndex)
+            {
+                case 0:
+                    petList = petList.OrderBy(i => i.IDPet).ToList();
+                    break;
+                case 1:
+                    petList = petList.OrderBy(i => i.IDGender == 1).ToList();
+                    break;
+                case 2:
+                    petList = petList.OrderBy(i => i.IDGender == 2).ToList();
+                    break;
+                default:
+                    petList = petList.OrderBy(i => i.IDPet).ToList();
+                    break;
+            }
+
+
+            switch (cbAge.SelectedIndex)
+            {
+                case 0:
+                    petList = petList.OrderBy(i => i.IDPet).ToList();
+                    break;
+                case 1:
+                    petList = petList.OrderBy(i => Convert.ToInt32(i.Age) <= 3).ToList();
+                    break;
+                case 2:
+                    petList = petList.OrderBy(i => Convert.ToInt32(i.Age) >= 4 & Convert.ToInt32(i.Age) <= 8).ToList();
+                    break;
+                case 3:
+                    petList = petList.OrderBy(i => Convert.ToInt32(i.Age) >= 9).ToList();
+                    break;
+                default:
+                    petList = petList.OrderBy(i => i.IDPet).ToList();
+                    break;
+            }
+
+            listCat.ItemsSource = petList;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            AddPetWindow addPetWindow = new AddPetWindow();
+            this.Opacity = 0.2;
+            addPetWindow.ShowDialog();
+            this.Opacity = 1;
+            Filter();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -42,8 +141,8 @@ namespace Paws_of_Hope.Windows
                     {
                         AppDate.Context.Pet.Remove(item);
                         AppDate.Context.SaveChanges();
-                        MessageBox.Show("Пользователь успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                        //Filter();
+                        MessageBox.Show("Питомец успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Filter();
                     }
                 }
                 catch (Exception ex)
@@ -55,7 +154,17 @@ namespace Paws_of_Hope.Windows
 
         private void listCat_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            var editCat = new EF.Pet();
 
+            if (listCat.SelectedItem is EF.Pet)
+            {
+                editCat = listCat.SelectedItem as EF.Pet;
+            }
+            InformationPetWindow informationPetWindow = new InformationPetWindow(editCat);
+            this.Opacity = 0.2;
+            informationPetWindow.ShowDialog();
+            this.Opacity = 1;
+            Filter();
         }
 
         private void txtBackMainWin_MouseUp(object sender, MouseButtonEventArgs e)
@@ -86,8 +195,8 @@ namespace Paws_of_Hope.Windows
                         {
                             AppDate.Context.Pet.Remove(item);
                             AppDate.Context.SaveChanges();
-                            MessageBox.Show("Пользователь успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                            //Filter();
+                            MessageBox.Show("Питомец успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                            Filter();
                         }
                     }
                     catch (Exception ex)
@@ -111,6 +220,26 @@ namespace Paws_of_Hope.Windows
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
                 instance.Text = instance.Tag.ToString();
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void cbShelter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void cbGender_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void cbAge_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
         }
     }
 }

@@ -162,65 +162,72 @@
                       MouseDoubleClick="listApplicationClient_MouseDoubleClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="#1da1f2"
-                            Height="100"
-                            Width="945"
+                        <Border Background="#ffffff"
+                            Height="190"
+                            Width="935"
                             Margin="5"
+                BorderThickness="2"
+                BorderBrush="#000000"
                             CornerRadius="10">
                             <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
-                                <Image x:Name="photoBook"
-                                   Height="80">
-                                    <Image.Source>
-                                        <Binding Path ="Photo">
-                                            <Binding.TargetNullValue>
-                                                <ImageSource>/Resourse/nophoto.jpg</ImageSource>
-                                            </Binding.TargetNullValue>
-                                        </Binding>
-                                    </Image.Source>
-                                </Image>
+                                <TextBlock Text="ФИО клиента"
+                           HorizontalAlignment="Left"
+                           FontSize="28"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Center"
+                           Style="{DynamicResource txtStyle}"/>
 
-                                <StackPanel Grid.Column="1"
-                                        Margin="0 10 10 0"
-                                        Grid.ColumnSpan="2">
-                                    <TextBlock Margin="0 0 0 5"
-                                           Text="{Binding GetTitle}"
-                                           HorizontalAlignment="Right"
-                                           FontSize="12"/>
+                                <TextBlock Text="Возраст животного: 30 лет"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           Style="{DynamicResource txtStyle}"/>
 
-                                    <TextBlock Margin="0 0 0 5"
-                                           Text="{Binding GetAuthor}"
-                                           HorizontalAlignment="Right"
-                                           FontSize="12"/>
+                                <TextBlock Text="Пол животного: мужской"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           Style="{DynamicResource txtStyle}"/>
 
-                                    <TextBlock Margin="0 0 0 5"
-                                           Text="{Binding GetPublishHouse}"
-                                           HorizontalAlignment="Right"
-                                           FontSize="12"/>
-                                </StackPanel>
+                                <TextBlock Text="Пожелания: Бим и Бом"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="3"
+                           Grid.Column="1"
+                           Style="{DynamicResource txtStyle}"/>
 
-                                <StackPanel Grid.Column="3"
-                            Margin="0 10 10 0"
-                                        Grid.ColumnSpan="2">
+                                <TextBlock Text="Тип: +79632341432"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="1"
+                           Grid.Column="2"
+                           Style="{DynamicResource txtStyle}"/>
 
-                                    <TextBlock Margin="0 0 0 5"
-                           Text="{Binding GetSection}"
-                           HorizontalAlignment="Right"
-                                           FontFamily="Helvetica"
-                                Foreground="#ffffff"
-                               FontSize="12"/>
-
-                                    <TextBlock Margin="0 0 0 5"
-                                           Text="{Binding GetCost}"
-                                           HorizontalAlignment="Right"
-                                           FontSize="12"/>
-                                </StackPanel>
                             </Grid>
                         </Border>
                     </DataTemplate>

@@ -20,6 +20,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -27,25 +28,7 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Border CornerRadius="100"
-                        BorderThickness="2"
-                        BorderBrush="Black"
-                        Height="130"
-                        Width="130"
-                        Grid.RowSpan="5">
-                    <Image x:Name="MainPhoto"
-                       Height="80"
-                       >
-                        <Image.Source>
-                            <Binding Path ="Photo">
-                                <Binding.TargetNullValue>
-                                    <ImageSource>/Resourse/nophoto.jpg</ImageSource>
-                                </Binding.TargetNullValue>
-                            </Binding>
-                        </Image.Source>
-                    </Image>
-                </Border>
-                <TextBlock Text="Фамилия Имя"
+                <TextBlock Text="ФИО клиента"
                            HorizontalAlignment="Left"
                            FontSize="28"
                            Grid.Column="1"
@@ -54,7 +37,7 @@
                            VerticalAlignment="Center"
                            Style="{DynamicResource txtStyle}"/>
 
-                <TextBlock Text="Возраст: 30 лет"
+                <TextBlock Text="Возраст животного: 30 лет"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Bottom"
                            FontWeight="Regular"
@@ -63,7 +46,7 @@
                            Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
-                <TextBlock Text="Пол: мужской"
+                <TextBlock Text="Пол животного: мужской"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontWeight="Regular"
@@ -72,16 +55,16 @@
                            Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
-                <TextBlock Text="Статус: передержка"
+                <TextBlock Text="Пожелания: Бим и Бом"
                            HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
+                           VerticalAlignment="Center"
                            FontWeight="Regular"
                            FontSize="16"
                            Grid.Row="3"
                            Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
-                <TextBlock Text="Телефон: +79632341432"
+                <TextBlock Text="Тип: +79632341432"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Bottom"
                            FontWeight="Regular"
@@ -90,29 +73,6 @@
                            Grid.Column="2"
                            Style="{DynamicResource txtStyle}"/>
 
-                <TextBlock Text="Email: fio@gmail.com"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
-                           FontWeight="Regular"
-                           FontSize="16"
-                           Grid.Row="2"
-                           Grid.Column="2"
-                           Style="{DynamicResource txtStyle}"/>
-
-
-                <Button x:Name="btnCheckApp"
-                        Style="{DynamicResource RoundCorner}"
-                        Grid.Row="1"
-                        Grid.Column="3"
-                        Grid.RowSpan="2"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Width="230"
-                        Height="40"
-                        Content="Посмотреть заявки"
-                        Foreground="#ffffff"
-                        FontSize="15"
-                        FontWeight="SemiBold"/>
             </Grid>
         </Border>
     </Grid>

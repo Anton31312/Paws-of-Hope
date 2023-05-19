@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d6ec5cbd148c415481057a57d1dee7e9" Name="Diagram1">
+      <Diagram DiagramId="d6ec5cbd148c415481057a57d1dee7e9" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="Model.AnimalShelter" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Application" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Client" Width="1.5" PointX="1.5" PointY="10.875" IsExpanded="true" />
@@ -35,6 +35,7 @@
         <EntityTypeShape EntityType="Model.StatusClient" Width="1.5" PointX="10.375" PointY="0.875" />
         <AssociationConnector Association="Model.FK_Client_StatusClient" />
         <AssociationConnector Association="Model.FK_Pet_SizePet" />
+        <AssociationConnector Association="Model.FK_Pet_Client" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

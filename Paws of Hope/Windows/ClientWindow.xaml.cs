@@ -1,4 +1,5 @@
 ﻿using Paws_of_Hope.Class;
+using Paws_of_Hope.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +21,93 @@ namespace Paws_of_Hope.Windows
     /// </summary>
     public partial class ClientWindow : Window
     {
+        List<Client> clientList = new List<Client>();
+        List<string> listStatus = new List<string>()
+        {
+            "По умолчанию",
+            "Клиент",
+            "Волонтёр",
+            "Передержка"
+        };
+
+        List<string> listGender = new List<string>()
+        {
+            "По умолчанию",
+            "Мужской",
+            "Женский"
+        };
+
         public ClientWindow()
         {
             InitializeComponent();
+
+            cbStatusClient.ItemsSource = listStatus;
+            cbStatusClient.SelectedIndex = 0;
+
+            cbGender.ItemsSource = listGender;
+            cbGender.SelectedIndex = 0;
+
+            Filter();
+
+        }
+
+        private void Filter()
+        {
+            clientList = AppDate.Context.Client.ToList();
+            clientList = clientList.Where(i => i.LastName.ToLower().Contains(tbSearch.Text.ToLower()) ||
+            i.FirstName.ToLower().Contains(tbSearch.Text.ToLower()) || i.Patronymic.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+
+            switch (cbStatusClient.SelectedIndex)
+            {
+                case 0:
+                    clientList = clientList.OrderBy(i => i.IDClient).ToList();
+                    break;
+                case 1:
+                    clientList = clientList.OrderBy(i => i.IDStatusClient == 1).ToList();
+                    break;
+                case 2:
+                    clientList = clientList.OrderByDescending(i => i.IDStatusClient == 2).ToList();
+                    break;
+                case 3:
+                    clientList = clientList.OrderByDescending(i => i.IDStatusClient == 3).ToList();
+                    break;
+                default:
+                    clientList = clientList.OrderBy(i => i.IDClient).ToList();
+                    break;
+            }
+
+            switch (cbGender.SelectedIndex)
+            {
+                case 0:
+                    clientList = clientList.OrderBy(i => i.IDClient).ToList();
+                    break;
+                case 1:
+                    clientList = clientList.OrderBy(i => i.IDGender == 1).ToList();
+                    break;
+                case 2:
+                    clientList = clientList.OrderBy(i => i.IDGender == 2).ToList();
+                    break;
+                default:
+                    clientList = clientList.OrderBy(i => i.IDClient).ToList();
+                    break;
+            }
+
+            listClient.ItemsSource = clientList;
         }
 
         private void listClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            var editClient= new EF.Client();
 
+            if (listClient.SelectedItem is EF.Client)
+            {
+                editClient = listClient.SelectedItem as EF.Client;
+            }
+            AddClientWindow addClientWindow = new AddClientWindow(editClient);
+            this.Opacity = 0.2;
+            addClientWindow.ShowDialog();
+            this.Opacity = 1;
+            Filter();
         }
 
         private void txtBackMainWin_MouseUp(object sender, MouseButtonEventArgs e)
@@ -58,8 +138,8 @@ namespace Paws_of_Hope.Windows
                         {
                             AppDate.Context.Client.Remove(item);
                             AppDate.Context.SaveChanges();
-                            MessageBox.Show("Пользователь успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                            //Filter();
+                            MessageBox.Show("Клиент успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                            Filter();
                         }
                     }
                     catch (Exception ex)
@@ -73,7 +153,11 @@ namespace Paws_of_Hope.Windows
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            AddClientWindow addClientWindow = new AddClientWindow();
+            this.Opacity = 0.2;
+            addClientWindow.ShowDialog();
+            this.Opacity = 1;
+            Filter();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -88,8 +172,8 @@ namespace Paws_of_Hope.Windows
                     {
                         AppDate.Context.Client.Remove(item);
                         AppDate.Context.SaveChanges();
-                        MessageBox.Show("Пользователь успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                        //Filter();
+                        MessageBox.Show("Клиент успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Filter();
                     }
                 }
                 catch (Exception ex)
@@ -111,6 +195,21 @@ namespace Paws_of_Hope.Windows
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
                 instance.Text = instance.Tag.ToString();
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void cbStatusClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void cbGender_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
         }
     }
 }

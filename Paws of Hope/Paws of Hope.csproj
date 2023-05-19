@@ -67,9 +67,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClassHelper\Pet.cs" />
+    <Compile Include="Windows\AddApplicationWindow.xaml.cs">
+      <DependentUpon>AddApplicationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddClientWindow.xaml.cs">
+      <DependentUpon>AddClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddPetWindow.xaml.cs">
+      <DependentUpon>AddPetWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\InformationPetWindow.xaml.cs">
+      <DependentUpon>InformationPetWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TestBorderForListWindow.xaml.cs">
       <DependentUpon>TestBorderForListWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Windows\AddApplicationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddPetWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ApplicationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\DogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\InformationPetWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,6 +287,7 @@
       <DependentUpon>ModelPawsofHope.edmx</DependentUpon>
       <LastGenOutput>ModelPawsofHope.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resourse\Animal\rear view of a beagle dog standing on three books.png" />
     <Resource Include="Resourse\nophoto.jpg" />
     <Resource Include="Resourse\Animal\cat lying on books.png" />
     <Resource Include="Resourse\Animal\dog in pink dressing sitting.png" />

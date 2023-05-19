@@ -59,7 +59,8 @@
                          TextAlignment="Left"
                          FontSize="18"
                          Foreground="LightGray"
-                         VerticalContentAlignment="Center"/>
+                         VerticalContentAlignment="Center"
+                         TextChanged="tbSearch_TextChanged"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2"
@@ -75,7 +76,8 @@
                     <ComboBox x:Name="cbShelter"
                          Style="{DynamicResource cbRound}"
                          Height="58"
-                         Width="286"/>
+                         Width="286"
+                              SelectionChanged="cbShelter_SelectionChanged"/>
                 </StackPanel>
 
                 <StackPanel Margin="0 10 0 0">
@@ -88,7 +90,8 @@
                     <ComboBox x:Name="cbGender"
                          Style="{DynamicResource cbRound}"
                          Height="58"
-                         Width="286"/>
+                         Width="286"
+                              SelectionChanged="cbGender_SelectionChanged"/>
                 </StackPanel>
 
                 <StackPanel Margin="0 10 0 0">
@@ -101,7 +104,8 @@
                     <ComboBox x:Name="cbAge"
                          Style="{DynamicResource cbRound}"
                          Height="58"
-                         Width="286"/>
+                         Width="286"
+                              SelectionChanged="cbAge_SelectionChanged"/>
                 </StackPanel>
 
                 <StackPanel Margin="0 10 0 0">
@@ -114,7 +118,8 @@
                     <ComboBox x:Name="cbSize"
                          Style="{DynamicResource cbRound}"
                          Height="58"
-                         Width="286"/>
+                         Width="286"
+                              SelectionChanged="cbSize_SelectionChanged"/>
                 </StackPanel>
             </StackPanel>
             
@@ -183,65 +188,116 @@
                       KeyUp="listDog_KeyUp">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="#1da1f2"
-                            Height="100"
-                            Width="945"
+                        <Border Background="#ffffff"
+                            Height="190"
+                            Width="935"
                             Margin="5"
+                BorderThickness="2"
+                BorderBrush="#000000"
                             CornerRadius="10">
                             <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
-                                <Image x:Name="photoBook"
-                                   Height="80">
-                                    <Image.Source>
-                                        <Binding Path ="Photo">
-                                            <Binding.TargetNullValue>
-                                                <ImageSource>/Resourse/nophoto.jpg</ImageSource>
-                                            </Binding.TargetNullValue>
-                                        </Binding>
-                                    </Image.Source>
-                                </Image>
+                                <Border CornerRadius="100"
+                        BorderThickness="2"
+                        BorderBrush="Black"
+                        Height="130"
+                        Width="130"
+                        Grid.RowSpan="5">
+                                    <Image x:Name="MainPhoto"
+                       Height="80"
+                       >
+                                        <Image.Source>
+                                            <Binding Path ="Photo">
+                                                <Binding.TargetNullValue>
+                                                    <ImageSource>/Resourse/nophoto.jpg</ImageSource>
+                                                </Binding.TargetNullValue>
+                                            </Binding>
+                                        </Image.Source>
+                                    </Image>
+                                </Border>
+                                <TextBlock Text="{Binding NamePet}"
+                           HorizontalAlignment="Left"
+                           FontSize="28"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Center"
+                           Style="{DynamicResource txtStyle}"/>
 
-                                <StackPanel Grid.Column="1"
-                                        Margin="0 10 10 0"
-                                        Grid.ColumnSpan="2">
-                                    <TextBlock Margin="0 0 0 5"
-                                           Text="{Binding GetTitle}"
-                                           HorizontalAlignment="Right"
-                                           FontSize="12"/>
+                                <TextBlock Text="{Binding GetAge}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           Style="{DynamicResource txtStyle}"/>
 
-                                    <TextBlock Margin="0 0 0 5"
-                                           Text="{Binding GetAuthor}"
-                                           HorizontalAlignment="Right"
-                                           FontSize="12"/>
+                                <TextBlock Text="{Binding GetGender}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="2"
+                           Grid.Column="1"
+                           Style="{DynamicResource txtStyle}"/>
 
-                                    <TextBlock Margin="0 0 0 5"
-                                           Text="{Binding GetPublishHouse}"
-                                           HorizontalAlignment="Right"
-                                           FontSize="12"/>
-                                </StackPanel>
+                                <TextBlock Text="{Binding GetAnimalShelter}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="3"
+                           Grid.Column="1"
+                           Style="{DynamicResource txtStyle}"/>
 
-                                <StackPanel Grid.Column="3"
-                            Margin="0 10 10 0"
-                                        Grid.ColumnSpan="2">
+                                <TextBlock Text="{Binding GetClient}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="4"
+                           Grid.Column="1"
+                           Style="{DynamicResource txtStyle}"/>
 
-                                    <TextBlock Margin="0 0 0 5"
-                           Text="{Binding GetSection}"
-                           HorizontalAlignment="Right"
-                                           FontFamily="Helvetica"
-                                Foreground="#ffffff"
-                               FontSize="12"/>
+                                <TextBlock Text="{Binding GetTutor}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="1"
+                           Grid.Column="2"
+                           Style="{DynamicResource txtStyle}"/>
 
-                                    <TextBlock Margin="0 0 0 5"
-                                           Text="{Binding GetCost}"
-                                           HorizontalAlignment="Right"
-                                           FontSize="12"/>
-                                </StackPanel>
+                                <TextBlock Text="{Binding GetDisas}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="2"
+                           Grid.Column="2"
+                           Style="{DynamicResource txtStyle}"/>
+
+                                <TextBlock Text="{Binding GetHistory}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="3"
+                           Grid.Column="2"
+                           Style="{DynamicResource txtStyle}"/>
                             </Grid>
                         </Border>
                     </DataTemplate>

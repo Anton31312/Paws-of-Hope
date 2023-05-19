@@ -35,6 +35,7 @@ namespace Paws_of_Hope.EF
         public int IDPhotoPath { get; set; }
         public bool IsActive { get; set; }
         public Nullable<int> IDSizePet { get; set; }
+        public Nullable<int> IDClient { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ExecutedApplication> ExecutedApplication { get; set; }
@@ -46,5 +47,6 @@ namespace Paws_of_Hope.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tutor> Tutor { get; set; }
         public virtual SizePet SizePet { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

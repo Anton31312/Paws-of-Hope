@@ -84,6 +84,7 @@
           <Property Name="IDPhotoPath" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IDSizePet" Type="int" />
+          <Property Name="IDClient" Type="int" />
         </EntityType>
         <EntityType Name="PhotoPath">
           <Key>
@@ -311,6 +312,18 @@
             </Principal>
             <Dependent Role="ExecutedApplication">
               <PropertyRef Name="IDPet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="IDClient" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -549,6 +562,10 @@
             <End Role="Pet" EntitySet="Pet" />
             <End Role="ExecutedApplication" EntitySet="ExecutedApplication" />
           </AssociationSet>
+          <AssociationSet Name="FK_Pet_Client" Association="Self.FK_Pet_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Pet" EntitySet="Pet" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pet_Gender" Association="Self.FK_Pet_Gender">
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Pet" EntitySet="Pet" />
@@ -635,6 +652,7 @@
           <NavigationProperty Name="Gender" Relationship="Self.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
           <Property Name="IDStatusClient" Type="Int32" Nullable="false" />
           <NavigationProperty Name="StatusClient" Relationship="Model.FK_Client_StatusClient" FromRole="Client" ToRole="StatusClient" />
+          <NavigationProperty Name="Pet" Relationship="Model.FK_Pet_Client" FromRole="Client" ToRole="Pet" />
         </EntityType>
         <EntityType Name="ExecutedApplication">
           <Key>
@@ -683,6 +701,8 @@
           <NavigationProperty Name="Tutor" Relationship="Self.TutorPet" FromRole="Pet" ToRole="Tutor" />
           <Property Name="IDSizePet" Type="Int32" />
           <NavigationProperty Name="SizePet" Relationship="Model.FK_Pet_SizePet" FromRole="Pet" ToRole="SizePet" />
+          <Property Name="IDClient" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Model.FK_Pet_Client" FromRole="Pet" ToRole="Client" />
         </EntityType>
         <EntityType Name="PhotoPath">
           <Key>
@@ -1030,6 +1050,10 @@
             <End Role="SizePet" EntitySet="SizePet" />
             <End Role="Pet" EntitySet="Pet" />
           </AssociationSet>
+          <AssociationSet Name="FK_Pet_Client" Association="Model.FK_Pet_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Pet" EntitySet="Pet" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="PR_AllInfoPet_Result">
           <Property Type="String" Name="Название_приюта" Nullable="false" MaxLength="150" />
@@ -1104,6 +1128,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Pet_Client">
+          <End Type="Model.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="Model.Pet" Role="Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1172,6 +1208,7 @@
           <EntitySetMapping Name="Pet">
             <EntityTypeMapping TypeName="Model.Pet">
               <MappingFragment StoreEntitySet="Pet">
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
                 <ScalarProperty Name="IDSizePet" ColumnName="IDSizePet" />
                 <ScalarProperty Name="IDPet" ColumnName="IDPet" />
                 <ScalarProperty Name="NamePet" ColumnName="NamePet" />

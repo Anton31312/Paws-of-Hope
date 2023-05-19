@@ -18,6 +18,7 @@ namespace Paws_of_Hope.EF
         public Client()
         {
             this.Application = new HashSet<Application>();
+            this.Pet = new HashSet<Pet>();
         }
     
         public int IDClient { get; set; }
@@ -34,5 +35,7 @@ namespace Paws_of_Hope.EF
         public virtual ICollection<Application> Application { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual StatusClient StatusClient { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pet> Pet { get; set; }
     }
 }
