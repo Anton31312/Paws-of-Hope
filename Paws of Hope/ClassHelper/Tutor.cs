@@ -8,8 +8,6 @@ namespace Paws_of_Hope.EF
 {
     public partial class Tutor
     {
-        public string GetTutor { get => $"Наставник: {TutorFIO.LastName} {TutorFIO.FirstName} {TutorFIO.Patronymic}"; }
+        public string GetTutor { get => $"Наставник: {LastName} {FirstName} {Patronymic}"; }
     }
-
-   
 }

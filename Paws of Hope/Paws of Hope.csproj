@@ -67,7 +67,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClassHelper\CurrentUser.cs" />
     <Compile Include="ClassHelper\Pet.cs" />
+    <Compile Include="ClassHelper\Tutor.cs" />
     <Compile Include="Windows\AddApplicationWindow.xaml.cs">
       <DependentUpon>AddApplicationWindow.xaml</DependentUpon>
     </Compile>
@@ -128,7 +130,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ClassHelper\AppDate.cs" />
-    <Compile Include="ClassHelper\HardTextSup.cs" />
     <Compile Include="EF\AnimalShelter.cs">
       <DependentUpon>ModelPawsofHope.tt</DependentUpon>
     </Compile>

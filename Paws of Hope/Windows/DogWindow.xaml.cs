@@ -21,8 +21,10 @@ namespace Paws_of_Hope.Windows
     /// </summary>
     public partial class DogWindow : Window
     {
+        private int TotalProducts = 0;
 
         List<Pet> petList = new List<Pet>();
+
         List<string> listAnimalShleter = new List<string>()
         {
             "По умолчанию",
@@ -69,39 +71,40 @@ namespace Paws_of_Hope.Windows
             cbSize.ItemsSource = listSize;
             cbSize.SelectedIndex = 0;
 
+
             Filter();
         }
 
         private void Filter()
         {
-            petList = AppDate.Context.Pet.Where(i => i.IsActive == true & i.IDTypePet == 1).ToList();
+            petList = AppDate.Context.Pet.Where(i => i.IDTypePet == 1).ToList();
             petList = petList.Where(i => i.NamePet.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
-
-            switch (cbShelter.SelectedIndex)
+            TotalProducts = petList.Count;
+            switch (cbShelter.SelectedValue.ToString())
             {
-                case 0:
+                case "По умолчанию":
                     petList = petList.OrderBy(i => i.IDPet).ToList();
                     break;
-                case 1:
-                    petList = petList.OrderBy(i => i.AnimalShelter).ToList();
+                case "По возрастанию":
+                    petList = petList.OrderBy(i => i.AnimalShelter.Any()).ToList();
                     break;
-                case 2:
-                    petList = petList.OrderByDescending(i => i.AnimalShelter).ToList();
+                case "По убыванию":
+                    petList = petList.OrderByDescending(i => i.AnimalShelter.Any()).ToList();
                     break;
                 default:
                     petList = petList.OrderBy(i => i.IDPet).ToList();
                     break;
             }
 
-            switch (cbGender.SelectedIndex)
+            switch (cbGender.SelectedValue.ToString())
             {
-                case 0:
+                case "По умолчанию":
                     petList = petList.OrderBy(i => i.IDPet).ToList();
                     break;
-                case 1:
+                case "Мужской":
                     petList = petList.OrderBy(i => i.IDGender == 1).ToList();
                     break;
-                case 2:
+                case "Женский":
                     petList = petList.OrderBy(i => i.IDGender == 2).ToList();
                     break;
                 default:
@@ -110,18 +113,18 @@ namespace Paws_of_Hope.Windows
             }
 
 
-            switch (cbAge.SelectedIndex)
+            switch (cbAge.SelectedValue.ToString())
             {
-                case 0:
+                case "По умолчанию":
                     petList = petList.OrderBy(i => i.IDPet).ToList();
                     break;
-                case 1:
+                case "Молодой":
                     petList = petList.OrderBy(i => Convert.ToInt32(i.Age) <= 3).ToList();
                     break;
-                case 2:
+                case "Взрослый":
                     petList = petList.OrderBy(i => Convert.ToInt32(i.Age) >= 4 & Convert.ToInt32(i.Age) <= 8).ToList();
                     break;
-                case 3:
+                case "Старый":
                     petList = petList.OrderBy(i => Convert.ToInt32(i.Age) >= 9).ToList();
                     break;
                 default:
@@ -129,18 +132,18 @@ namespace Paws_of_Hope.Windows
                     break;
             }
 
-            switch (cbSize.SelectedIndex)
+            switch (cbSize.SelectedValue.ToString())
             {
-                case 0:
+                case "По умолчанию":
                     petList = petList.OrderBy(i => i.IDPet).ToList();
                     break;
-                case 1:
+                case "Маленький":
                     petList = petList.OrderBy(i => i.IDSizePet = 1).ToList();
                     break;
-                case 2:
+                case "Средний":
                     petList = petList.OrderBy(i => i.IDSizePet = 2).ToList();
                     break;
-                case 3:
+                case "Большой":
                     petList = petList.OrderBy(i => i.IDSizePet = 3).ToList();
                     break;
                 default:
@@ -149,11 +152,19 @@ namespace Paws_of_Hope.Windows
             }
 
             listDog.ItemsSource = petList;
+
+            UpdateItemAmountText();
+            txtCountProd.Visibility = petList.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
+        private void UpdateItemAmountText()
+        {
+            txtCountProd.Text = $"{petList.Count} из {TotalProducts}";
+        }
 
         private void txtExit_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            CurrentUser.FullName = "";
             AuthWindow authWindow = new AuthWindow();
             authWindow.Show();
             this.Close();

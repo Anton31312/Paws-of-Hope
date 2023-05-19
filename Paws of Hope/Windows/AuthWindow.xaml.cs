@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Paws_of_Hope.Class;
+using Paws_of_Hope.EF;
 
 namespace Paws_of_Hope.Windows
 {
@@ -34,6 +35,7 @@ namespace Paws_of_Hope.Windows
                 FirstOrDefault();
             if (userAuth != null)
             {
+                CurrentUser.FullName = string.Join(" ", new string[4] { "Наставник:", userAuth.LastName, userAuth.FirstName ,userAuth.Patronymic});
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 this.Close();

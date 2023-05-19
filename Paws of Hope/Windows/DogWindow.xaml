@@ -304,14 +304,16 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <TextBlock Text="3 из 100"
-                       Grid.Row="2"
+                <TextBlock Text="3 из 100"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
+                           Grid.Row="2"
                        FontSize="20"
                        Margin="0 0 40 0"
                        FontWeight="Regular"
-                       Style="{DynamicResource txtStyle}"/>
+                       Style="{DynamicResource txtStyle}"
+                           x:Name="txtCountProd"/>
+            
         </Grid>
 
     </Grid>

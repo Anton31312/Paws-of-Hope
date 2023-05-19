@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Paws_of_Hope.Class;
+using Paws_of_Hope.EF;
 using Paws_of_Hope.Windows;
 
 namespace Paws_of_Hope
@@ -22,9 +23,11 @@ namespace Paws_of_Hope
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+            txtNameTutor.Text = CurrentUser.FullName;
         }
 
         private void txtExit_MouseUp(object sender, MouseButtonEventArgs e)
