@@ -21,23 +21,9 @@ namespace Paws_of_Hope.Windows
     /// </summary>
     public partial class DogWindow : Window
     {
-        private int TotalProducts = 0;
+        private int TotalPet = 0;
 
-        List<Pet> petList = new List<Pet>();
-
-        List<string> listAnimalShleter = new List<string>()
-        {
-            "По умолчанию",
-            "По возрастанию",
-            "По убыванию"
-        };
-
-        List<string> listGender = new List<string>()
-        {
-            "По умолчанию",
-            "Мужской",
-            "Женский"
-        };
+        List<VW_PetTutor> petList = new List<VW_PetTutor>();
 
         List<string> listAge = new List<string>()
         {
@@ -47,119 +33,65 @@ namespace Paws_of_Hope.Windows
             "Старый"
         };
 
-        List<string> listSize = new List<string>()
-        {
-            "По умолчанию",
-            "Маленький",
-            "Средний",
-            "Большой"
-        };
-
         public DogWindow()
         {
+            Filter();
             InitializeComponent();
 
-            cbShelter.ItemsSource = listAnimalShleter;
-            cbShelter.SelectedIndex = 0;
+            var animalShelter = AppDate.GetAllAnimalShelter();
+            animalShelter.Insert(0, "Все приюты");
+            cbShelter.ItemsSource = animalShelter;
 
-            cbGender.ItemsSource = listGender;
-            cbGender.SelectedIndex = 0;
+            var gender = AppDate.GetAllGender();
+            gender.Insert(0, "По умолчанию");
+            cbGender.ItemsSource = gender;
 
             cbAge.ItemsSource = listAge;
             cbAge.SelectedIndex = 0;
 
-            cbSize.ItemsSource = listSize;
-            cbSize.SelectedIndex = 0;
+            var size = AppDate.GetAllSize();
+            size.Insert(0, "По умолчанию");
+            cbSize.ItemsSource = size;
 
-
-            Filter();
         }
 
         private void Filter()
         {
-            petList = AppDate.Context.Pet.Where(i => i.IDTypePet == 1).ToList();
+            if (listDog is null)
+                return;
+
+            petList = AppDate.Context.VW_PetTutor.Where(i => i.TypePetID == 1).ToList();
             petList = petList.Where(i => i.NamePet.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
-            TotalProducts = petList.Count;
-            switch (cbShelter.SelectedValue.ToString())
+            TotalPet = AppDate.GetAllPet().Count;
+
+            switch (cbAge.SelectedIndex)
             {
-                case "По умолчанию":
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
+                case 0:
+                    petList = petList.OrderBy(i => i.NamePet).ToList();
                     break;
-                case "По возрастанию":
-                    petList = petList.OrderBy(i => i.AnimalShelter.Any()).ToList();
+                case 1:
+                    petList = petList.OrderBy(i => Convert.ToInt32(i.AgePet) <= 3).ToList();
                     break;
-                case "По убыванию":
-                    petList = petList.OrderByDescending(i => i.AnimalShelter.Any()).ToList();
+                case 2:
+                    petList = petList.OrderBy(i => Convert.ToInt32(i.AgePet) >= 4 & Convert.ToInt32(i.AgePet) <= 8).ToList();
+                    break;
+                case 3:
+                    petList = petList.OrderBy(i => Convert.ToInt32(i.AgePet) >= 9).ToList();
                     break;
                 default:
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
+                    petList = petList.OrderBy(i => i.NamePet).ToList();
                     break;
             }
 
-            switch (cbGender.SelectedValue.ToString())
-            {
-                case "По умолчанию":
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
-                    break;
-                case "Мужской":
-                    petList = petList.OrderBy(i => i.IDGender == 1).ToList();
-                    break;
-                case "Женский":
-                    petList = petList.OrderBy(i => i.IDGender == 2).ToList();
-                    break;
-                default:
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
-                    break;
-            }
-
-
-            switch (cbAge.SelectedValue.ToString())
-            {
-                case "По умолчанию":
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
-                    break;
-                case "Молодой":
-                    petList = petList.OrderBy(i => Convert.ToInt32(i.Age) <= 3).ToList();
-                    break;
-                case "Взрослый":
-                    petList = petList.OrderBy(i => Convert.ToInt32(i.Age) >= 4 & Convert.ToInt32(i.Age) <= 8).ToList();
-                    break;
-                case "Старый":
-                    petList = petList.OrderBy(i => Convert.ToInt32(i.Age) >= 9).ToList();
-                    break;
-                default:
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
-                    break;
-            }
-
-            switch (cbSize.SelectedValue.ToString())
-            {
-                case "По умолчанию":
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
-                    break;
-                case "Маленький":
-                    petList = petList.OrderBy(i => i.IDSizePet = 1).ToList();
-                    break;
-                case "Средний":
-                    petList = petList.OrderBy(i => i.IDSizePet = 2).ToList();
-                    break;
-                case "Большой":
-                    petList = petList.OrderBy(i => i.IDSizePet = 3).ToList();
-                    break;
-                default:
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
-                    break;
-            }
 
             listDog.ItemsSource = petList;
 
             UpdateItemAmountText();
-            txtCountProd.Visibility = petList.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void UpdateItemAmountText()
         {
-            txtCountProd.Text = $"{petList.Count} из {TotalProducts}";
+            txtCountProd.Text = $"{petList.Count} из {TotalPet}";
         }
 
         private void txtExit_MouseUp(object sender, MouseButtonEventArgs e)

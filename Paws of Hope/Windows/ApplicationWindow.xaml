@@ -59,37 +59,13 @@
                          TextAlignment="Left"
                          FontSize="18"
                          Foreground="LightGray"
-                         VerticalContentAlignment="Center"/>
+                         VerticalContentAlignment="Center"
+                         TextChanged="tbSearch_TextChanged"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2"
                         Grid.RowSpan="3"
                         Orientation="Vertical">
-                <StackPanel Margin="0 10 0 0">
-                    <TextBlock Text="Пол"
-                           Style="{DynamicResource txtStyle}"
-                           FontSize="32"
-                           FontWeight="SemiBold"
-                           Margin="40 0 0 0"
-                           Foreground="#ffffff"/>
-                    <ComboBox x:Name="cbGender"
-                         Style="{DynamicResource cbRound}"
-                         Height="58"
-                         Width="286"/>
-                </StackPanel>
-
-                <StackPanel Margin="0 10 0 0">
-                    <TextBlock Text="Возраст"
-                           Style="{DynamicResource txtStyle}"
-                           FontSize="32"
-                           FontWeight="SemiBold"
-                           Margin="40 0 0 0"
-                           Foreground="#ffffff"/>
-                    <ComboBox x:Name="cbAge"
-                         Style="{DynamicResource cbRound}"
-                         Height="58"
-                         Width="286"/>
-                </StackPanel>
 
                 <StackPanel Margin="0 10 0 0">
                     <TextBlock Text="Статус"
@@ -101,7 +77,8 @@
                     <ComboBox x:Name="cbStatusClient"
                          Style="{DynamicResource cbRound}"
                          Height="58"
-                         Width="286"/>
+                         Width="286"
+                              SelectionChanged="cbStatusClient_SelectionChanged"/>
                 </StackPanel>
             </StackPanel>
 
@@ -183,7 +160,7 @@
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="ФИО клиента"
+                                <TextBlock Text="{Binding GetFullNameClient}"
                            HorizontalAlignment="Left"
                            FontSize="28"
                            Grid.Column="1"
@@ -192,16 +169,16 @@
                            VerticalAlignment="Center"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Возраст животного: 30 лет"
+                                <TextBlock Text="{Binding GetTypePet}"
                            HorizontalAlignment="Left"
-                           VerticalAlignment="Bottom"
+                           VerticalAlignment="Center"
                            FontWeight="Regular"
                            FontSize="16"
                            Grid.Row="1"
                            Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Пол животного: мужской"
+                                <TextBlock Text="{Binding GetWishes}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontWeight="Regular"
@@ -210,7 +187,7 @@
                            Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Пожелания: Бим и Бом"
+                                <TextBlock Text="{Binding GetDateApp}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontWeight="Regular"
@@ -219,15 +196,32 @@
                            Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Тип: +79632341432"
+                                <TextBlock Text="{Binding GetStatus}"
                            HorizontalAlignment="Left"
-                           VerticalAlignment="Bottom"
+                           VerticalAlignment="Center"
                            FontWeight="Regular"
                            FontSize="16"
                            Grid.Row="1"
                            Grid.Column="2"
                            Style="{DynamicResource txtStyle}"/>
 
+                                <TextBlock Text="{Binding GetGender}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="2"
+                           Grid.Column="2"
+                           Style="{DynamicResource txtStyle}"/>
+                                
+                                <TextBlock Text="{Binding GetAge}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontWeight="Regular"
+                           FontSize="16"
+                           Grid.Row="3"
+                           Grid.Column="2"
+                           Style="{DynamicResource txtStyle}"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
@@ -241,7 +235,8 @@
                        FontSize="20"
                        Margin="0 0 40 0"
                        FontWeight="Regular"
-                       Style="{DynamicResource txtStyle}"/>
+                       Style="{DynamicResource txtStyle}"
+                       x:Name="txtCountApp"/>
         </Grid>
 
     </Grid>

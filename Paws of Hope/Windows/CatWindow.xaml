@@ -215,7 +215,7 @@
                                         </Image.Source>
                                     </Image>
                                 </Border>
-                                <TextBlock Text="Кличка"
+                                <TextBlock Text="{Binding NamePet}"
                            HorizontalAlignment="Left"
                            FontSize="28"
                            Grid.Column="1"
@@ -224,7 +224,7 @@
                            VerticalAlignment="Center"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Возраст: 30 лет"
+                                <TextBlock Text="{Binding GetAge}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Bottom"
                            FontWeight="Regular"
@@ -233,7 +233,7 @@
                            Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Пол: мужской"
+                                <TextBlock Text="{Binding GetGender}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontWeight="Regular"
@@ -242,7 +242,7 @@
                            Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Приют: Бим и Бом"
+                                <TextBlock Text="{Binding GetAnimalShelter, FallbackValue='Приют: Неизвестно'}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontWeight="Regular"
@@ -251,7 +251,7 @@
                            Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Владелец: Отсутсвует"
+                                <TextBlock Text="{Binding GetClient, FallbackValue='Владелец: Отсутствует'}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontWeight="Regular"
@@ -260,7 +260,7 @@
                            Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Наставник: +79632341432"
+                                <TextBlock Text="{Binding GetTutor, FallbackValue='Наставник: Неизвестно'}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Bottom"
                            FontWeight="Regular"
@@ -269,7 +269,7 @@
                            Grid.Column="2"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Болезни: fio@gmail.com"
+                                <TextBlock Text="{Binding GetDisas}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontWeight="Regular"
@@ -278,7 +278,7 @@
                            Grid.Column="2"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="История: fio@gmail.com"
+                                <TextBlock Text="{Binding GetHistory}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontWeight="Regular"
@@ -299,7 +299,8 @@
                        FontSize="20"
                        Margin="0 0 40 0"
                        FontWeight="Regular"
-                       Style="{DynamicResource txtStyle}"/>
+                       Style="{DynamicResource txtStyle}"
+                       x:Name="txtCountProd"/>
         </Grid>
         
     </Grid>

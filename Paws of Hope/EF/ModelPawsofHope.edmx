@@ -186,6 +186,9 @@
             <PropertyRef Name="NamePet" />
             <PropertyRef Name="GenderPet" />
             <PropertyRef Name="TypePet" />
+            <PropertyRef Name="TypePetID" />
+            <PropertyRef Name="ClientFullName" />
+            <PropertyRef Name="AnimalShelteFullName" />
           </Key>
           <Property Name="TutorFullName" Type="nvarchar" MaxLength="186" Nullable="false" />
           <Property Name="NamePet" Type="nvarchar" MaxLength="150" Nullable="false" />
@@ -193,7 +196,11 @@
           <Property Name="DiseasesPet" Type="nvarchar(max)" />
           <Property Name="GenderPet" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TypePet" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TypePetID" Type="int" Nullable="false" />
           <Property Name="HistoryPet" Type="nvarchar(max)" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="ClientFullName" Type="nvarchar" MaxLength="156" Nullable="false" />
+          <Property Name="AnimalShelteFullName" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <Association Name="FK_AnimalShelterPet_AnimalShelter">
           <End Role="AnimalShelter" Type="Self.AnimalShelter" Multiplicity="1" />
@@ -519,7 +526,11 @@
     [VW_PetTutor].[DiseasesPet] AS [DiseasesPet], 
     [VW_PetTutor].[GenderPet] AS [GenderPet], 
     [VW_PetTutor].[TypePet] AS [TypePet], 
-    [VW_PetTutor].[HistoryPet] AS [HistoryPet]
+    [VW_PetTutor].[TypePetID] AS [TypePetID], 
+    [VW_PetTutor].[HistoryPet] AS [HistoryPet], 
+    [VW_PetTutor].[ClientID] AS [ClientID], 
+    [VW_PetTutor].[ClientFullName] AS [ClientFullName], 
+    [VW_PetTutor].[AnimalShelteFullName] AS [AnimalShelteFullName]
     FROM [dbo].[VW_PetTutor] AS [VW_PetTutor]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_AnimalShelterPet_AnimalShelter" Association="Self.FK_AnimalShelterPet_AnimalShelter">
@@ -778,6 +789,9 @@
             <PropertyRef Name="NamePet" />
             <PropertyRef Name="GenderPet" />
             <PropertyRef Name="TypePet" />
+            <PropertyRef Name="TypePetID" />
+            <PropertyRef Name="ClientFullName" />
+            <PropertyRef Name="AnimalShelteFullName" />
           </Key>
           <Property Name="TutorFullName" Type="String" MaxLength="186" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NamePet" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
@@ -786,6 +800,10 @@
           <Property Name="GenderPet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TypePet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="HistoryPet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypePetID" Type="Int32" Nullable="false" />
+          <Property Name="ClientID" Type="Int32" />
+          <Property Name="ClientFullName" Type="String" Nullable="false" MaxLength="156" FixedLength="false" Unicode="true" />
+          <Property Name="AnimalShelteFullName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_ExecutedApplication_AnimalShelter">
           <End Role="AnimalShelter" Type="Self.AnimalShelter" Multiplicity="1" />
@@ -1291,6 +1309,10 @@
           <EntitySetMapping Name="VW_PetTutor">
             <EntityTypeMapping TypeName="Model.VW_PetTutor">
               <MappingFragment StoreEntitySet="VW_PetTutor">
+                <ScalarProperty Name="AnimalShelteFullName" ColumnName="AnimalShelteFullName" />
+                <ScalarProperty Name="ClientFullName" ColumnName="ClientFullName" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="TypePetID" ColumnName="TypePetID" />
                 <ScalarProperty Name="TutorFullName" ColumnName="TutorFullName" />
                 <ScalarProperty Name="NamePet" ColumnName="NamePet" />
                 <ScalarProperty Name="AgePet" ColumnName="AgePet" />

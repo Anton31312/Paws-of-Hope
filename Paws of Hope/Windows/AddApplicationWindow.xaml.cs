@@ -24,6 +24,11 @@ namespace Paws_of_Hope.Windows
             InitializeComponent();
         }
 
+        public AddApplicationWindow(EF.ExecutedApplication application)
+        {
+            InitializeComponent();
+        }
+
         private void txtPetWish_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;

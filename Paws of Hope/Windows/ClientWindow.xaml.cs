@@ -3,16 +3,9 @@ using Paws_of_Hope.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Paws_of_Hope.Windows
 {
@@ -21,31 +14,20 @@ namespace Paws_of_Hope.Windows
     /// </summary>
     public partial class ClientWindow : Window
     {
+        private int TotalPet = 0;
         List<Client> clientList = new List<Client>();
-        List<string> listStatus = new List<string>()
-        {
-            "По умолчанию",
-            "Клиент",
-            "Волонтёр",
-            "Передержка"
-        };
-
-        List<string> listGender = new List<string>()
-        {
-            "По умолчанию",
-            "Мужской",
-            "Женский"
-        };
 
         public ClientWindow()
         {
             InitializeComponent();
 
-            cbStatusClient.ItemsSource = listStatus;
-            cbStatusClient.SelectedIndex = 0;
+            var status = AppDate.GetAllStatus();
+            status.Insert(0, "По умолчанию");
+            cbStatusClient.ItemsSource = status;
 
-            cbGender.ItemsSource = listGender;
-            cbGender.SelectedIndex = 0;
+            var gender = AppDate.GetAllGender();
+            gender.Insert(0, "По умолчанию");
+            cbGender.ItemsSource = gender;
 
             Filter();
 
@@ -53,46 +35,22 @@ namespace Paws_of_Hope.Windows
 
         private void Filter()
         {
+            if (listClient is null)
+                return;
+
             clientList = AppDate.Context.Client.ToList();
             clientList = clientList.Where(i => i.LastName.ToLower().Contains(tbSearch.Text.ToLower()) ||
             i.FirstName.ToLower().Contains(tbSearch.Text.ToLower()) || i.Patronymic.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            TotalPet = AppDate.GetAllClient().Count;
 
-            switch (cbStatusClient.SelectedIndex)
-            {
-                case 0:
-                    clientList = clientList.OrderBy(i => i.IDClient).ToList();
-                    break;
-                case 1:
-                    clientList = clientList.OrderBy(i => i.IDStatusClient == 1).ToList();
-                    break;
-                case 2:
-                    clientList = clientList.OrderByDescending(i => i.IDStatusClient == 2).ToList();
-                    break;
-                case 3:
-                    clientList = clientList.OrderByDescending(i => i.IDStatusClient == 3).ToList();
-                    break;
-                default:
-                    clientList = clientList.OrderBy(i => i.IDClient).ToList();
-                    break;
-            }
-
-            switch (cbGender.SelectedIndex)
-            {
-                case 0:
-                    clientList = clientList.OrderBy(i => i.IDClient).ToList();
-                    break;
-                case 1:
-                    clientList = clientList.OrderBy(i => i.IDGender == 1).ToList();
-                    break;
-                case 2:
-                    clientList = clientList.OrderBy(i => i.IDGender == 2).ToList();
-                    break;
-                default:
-                    clientList = clientList.OrderBy(i => i.IDClient).ToList();
-                    break;
-            }
 
             listClient.ItemsSource = clientList;
+            UpdateItemAmountText();
+        }
+
+        private void UpdateItemAmountText()
+        {
+            txtCountClient.Text = $"{clientList.Count} из {TotalPet}";
         }
 
         private void listClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)

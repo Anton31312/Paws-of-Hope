@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Paws_of_Hope.EF
 {
-    public partial class Pet
+    public partial class VW_PetTutor
     {
-        public string GetAge { get => $"Возраст: {Age}"; }
-        public string GetGender { get => $"Пол: {Gender.NameGender}"; }
-        public string GetAnimalShelter { get => $"Приют: {AnimalShelter}"; }
-        public string GetClient { get => $"Владелец: {Client.LastName}, {Client.FirstName}, {Client.Patronymic}"; }
-        public string GetTutor { get => $"Наставник: {Tutor}"; }
-        public string GetDisas { get => $"Болезни: {Diseases}"; }
-        public string GetHistory { get => $"История: {History}"; }
+        public string GetAge { get => $"Возраст: {AgePet}"; }
+        public string GetGender { get => $"Пол: {GenderPet}"; }
+        public string GetAnimalShelter { get => $"Приют: {AnimalShelteFullName}"; }
+        public string GetClient { get => $"Владелец: {ClientFullName}"; }
+        public string GetTutor { get => $"Наставник: {TutorFullName}"; }
+        public string GetDisas { get => $"Болезни: {DiseasesPet}"; }
+        public string GetHistory { get => $"История: {HistoryPet}"; }
 
     }
 }

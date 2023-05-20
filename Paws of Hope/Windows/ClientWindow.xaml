@@ -197,7 +197,7 @@
                                         </Image.Source>
                                     </Image>
                                 </Border>
-                                <TextBlock Text="Фамилия Имя"
+                                <TextBlock Text="{Binding GetFullName}"
                                            HorizontalAlignment="Left"
                                            FontSize="28"
                                            Grid.Column="1"
@@ -206,7 +206,7 @@
                                            VerticalAlignment="Center"
                                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Возраст: 30 лет"
+                                <TextBlock Text="{Binding GetAge}"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Bottom"
                                            FontWeight="Regular"
@@ -215,7 +215,7 @@
                                            Grid.Column="1"
                                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Пол: мужской"
+                                <TextBlock Text="{Binding GetGender}"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Center"
                                            FontWeight="Regular"
@@ -224,7 +224,7 @@
                                            Grid.Column="1"
                                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Статус: передержка"
+                                <TextBlock Text="{Binding GetStatus}"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Top"
                                            FontWeight="Regular"
@@ -233,7 +233,7 @@
                                            Grid.Column="1"
                                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Телефон: +79632341432"
+                                <TextBlock Text="{Binding GetPhone}"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Bottom"
                                            FontWeight="Regular"
@@ -242,7 +242,7 @@
                                            Grid.Column="2"
                                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="Email: fio@gmail.com"
+                                <TextBlock Text="{Binding GetEmail}"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Center"
                                            FontWeight="Regular"
@@ -277,6 +277,7 @@
                        FontSize="20"
                        Margin="0 0 40 0"
                        FontWeight="Regular"
+                       x:Name="txtCountClient"
                        Style="{DynamicResource txtStyle}"/>
         </Grid>
 

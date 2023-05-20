@@ -67,6 +67,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClassHelper\Application.cs" />
+    <Compile Include="ClassHelper\Client.cs" />
     <Compile Include="ClassHelper\CurrentUser.cs" />
     <Compile Include="ClassHelper\Pet.cs" />
     <Compile Include="ClassHelper\Tutor.cs" />

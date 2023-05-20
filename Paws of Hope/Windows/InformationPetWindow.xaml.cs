@@ -1,17 +1,7 @@
 ﻿using Paws_of_Hope.Class;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Paws_of_Hope.Windows
 {
@@ -50,8 +40,11 @@ namespace Paws_of_Hope.Windows
             //get value
             txtPetName.Text = editPet.NamePet;
             cbGender.SelectedIndex = editPet.IDGender - 1;
-            cbPetHoz.SelectedIndex = (int)(editPet.IDClient - 1);
-            cbSizePet.SelectedIndex = (int)(editPet.IDSizePet - 1);
+            //cbPetHoz.SelectedIndex = (int)(editPet.IDClient - 1);
+            if (pet.IDTypePet == 1)
+            {
+                cbSizePet.SelectedIndex = (int)(editPet.IDSizePet - 1);
+            }
             cbTypePet.SelectedIndex = editPet.IDTypePet - 1;
         }
 
@@ -62,7 +55,18 @@ namespace Paws_of_Hope.Windows
 
         private void btnBackPet_Click(object sender, RoutedEventArgs e)
         {
-         
+            if (editPet.IDTypePet != 2)
+            {
+                CatWindow catWindow = new CatWindow();
+                catWindow.Show();
+                this.Close();
+            }
+            else if (editPet.IDTypePet == 1)
+            {
+                DogWindow dogWindow = new DogWindow();
+                dogWindow.Show();
+                this.Close();
+            }
         }
 
         private void btnCheckPhoto_Click(object sender, RoutedEventArgs e)

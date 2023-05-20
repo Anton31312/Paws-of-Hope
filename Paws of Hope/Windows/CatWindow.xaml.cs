@@ -21,20 +21,9 @@ namespace Paws_of_Hope.Windows
     /// </summary>
     public partial class CatWindow : Window
     {
-        List<Pet> petList = new List<Pet>();
-        List<string> listAnimalShleter = new List<string>()
-        {
-            "По умолчанию",
-            "По возрастанию",
-            "По убыванию"
-        };
+        private int TotalPet = 0;
 
-        List<string> listGender = new List<string>()
-        {
-            "По умолчанию",
-            "Мужской",
-            "Женский"
-        };
+        List<VW_PetTutor> petList = new List<VW_PetTutor>();
 
         List<string> listAge = new List<string>()
         {
@@ -48,11 +37,13 @@ namespace Paws_of_Hope.Windows
         {
             InitializeComponent();
 
-            cbShelter.ItemsSource = listAnimalShleter;
-            cbShelter.SelectedIndex = 0;
+            var animalShelter = AppDate.GetAllAnimalShelter();
+            animalShelter.Insert(0, "Все приюты");
+            cbShelter.ItemsSource = animalShelter;
 
-            cbGender.ItemsSource = listGender;
-            cbGender.SelectedIndex = 0;
+            var gender = AppDate.GetAllGender();
+            gender.Insert(0, "По умолчанию");
+            cbGender.ItemsSource = gender;
 
             cbAge.ItemsSource = listAge;
             cbAge.SelectedIndex = 0;
@@ -62,62 +53,41 @@ namespace Paws_of_Hope.Windows
 
         private void Filter()
         {
-            petList = AppDate.Context.Pet.Where(i => i.IsActive == true & i.IDTypePet == 2).ToList();
-            petList = petList.Where(i => i.NamePet.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            if (listCat is null)
+                return;
 
-            switch (cbShelter.SelectedIndex)
-            {
-                case 0:
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
-                    break;
-                case 1:
-                    petList = petList.OrderBy(i => i.AnimalShelter).ToList();
-                    break;
-                case 2:
-                    petList = petList.OrderByDescending(i => i.AnimalShelter).ToList();
-                    break;
-                default:
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
-                    break;
-            }
-
-            switch (cbGender.SelectedIndex)
-            {
-                case 0:
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
-                    break;
-                case 1:
-                    petList = petList.OrderBy(i => i.IDGender == 1).ToList();
-                    break;
-                case 2:
-                    petList = petList.OrderBy(i => i.IDGender == 2).ToList();
-                    break;
-                default:
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
-                    break;
-            }
-
+            petList = AppDate.Context.VW_PetTutor.Where(i => i.TypePetID == 2).ToList();
+            petList = petList.Where(i => i.NamePet.ToLower().Contains(tbSearch.Text.ToLower()) ||
+                            i.AnimalShelteFullName.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            TotalPet = AppDate.GetAllPet().Count;
 
             switch (cbAge.SelectedIndex)
             {
                 case 0:
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
+                    petList = petList.OrderBy(i => i.NamePet).ToList();
                     break;
                 case 1:
-                    petList = petList.OrderBy(i => Convert.ToInt32(i.Age) <= 3).ToList();
+                    petList = petList.OrderBy(i => Convert.ToInt32(i.AgePet) <= 3).ToList();
                     break;
                 case 2:
-                    petList = petList.OrderBy(i => Convert.ToInt32(i.Age) >= 4 & Convert.ToInt32(i.Age) <= 8).ToList();
+                    petList = petList.OrderBy(i => Convert.ToInt32(i.AgePet) >= 4 & Convert.ToInt32(i.AgePet) <= 8).ToList();
                     break;
                 case 3:
-                    petList = petList.OrderBy(i => Convert.ToInt32(i.Age) >= 9).ToList();
+                    petList = petList.OrderBy(i => Convert.ToInt32(i.AgePet) >= 9).ToList();
                     break;
                 default:
-                    petList = petList.OrderBy(i => i.IDPet).ToList();
+                    petList = petList.OrderBy(i => i.NamePet).ToList();
                     break;
             }
 
             listCat.ItemsSource = petList;
+
+            UpdateItemAmountText();
+        }
+
+        private void UpdateItemAmountText()
+        {
+            txtCountProd.Text = $"{petList.Count} из {TotalPet}";
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
