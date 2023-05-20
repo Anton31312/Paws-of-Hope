@@ -187,7 +187,6 @@
             </Setter>
         </Style>
 
-
         <!--Style TextBox-->
         <Style x:Key="txtRound" TargetType="{x:Type TextBox}">
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -291,12 +290,12 @@
                         <Grid>
                             <Border BorderBrush="#000000" BorderThickness="2" CornerRadius="20">
                                 <Grid>
-                                    <ToggleButton x:Name="ToggleButton" Template="{DynamicResource ComboBoxToggleButton}" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press">
+                                    <ToggleButton x:Name="ToggleButton" Template="{DynamicResource cbToggleButtonRound}" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press">
                                     </ToggleButton>
-                                    <ContentPresenter x:Name="ContentSite" IsHitTestVisible="False"/>
+                                    <ContentPresenter x:Name="ContentSite" IsHitTestVisible="True"/>
                                     <Popup x:Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
                                         <Grid x:Name="DropDown" SnapsToDevicePixels="True">
-                                            <Border CornerRadius="20" Background="#ffffff" BorderBrush="#000000" BorderThickness="2"/>
+                                            <Border CornerRadius="0" Background="#ffffff" BorderBrush="#000000" BorderThickness="2"/>
                                             <ScrollViewer SnapsToDevicePixels="True">
                                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
                                             </ScrollViewer>
@@ -309,6 +308,59 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!--Style ToggleButton-->
+        <ControlTemplate x:Key="cbToggleButtonRound"
+                 TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Unchecked" />
+                        <VisualState x:Name="Indeterminate" />
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Border x:Name="Border"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="20"
+                        BorderThickness="1"
+                        BorderBrush="#ffffff">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="0,1">
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStopCollection>
+                                    <GradientStop Color="#ffffff" />
+                                    <GradientStop Color="#ffffff"
+                                                  Offset="1.0" />
+                                </GradientStopCollection>
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+
+                    </Border.Background>
+                </Border>
+                <Border Grid.Column="0"
+                        CornerRadius="2,0,0,2"
+                        Margin="1" >
+                    <Border.Background>
+                        <SolidColorBrush Color="{DynamicResource ControlLightColor}"/>
+                    </Border.Background>
+                </Border>
+                <Path x:Name="Arrow"
+                      Grid.Column="1"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Data="M 0 0 L 4 4 L 8 0 Z" >
+                    <Path.Fill>
+                        <SolidColorBrush Color="#000000"/>
+                    </Path.Fill>
+                </Path>
+            </Grid>
+        </ControlTemplate>
 
         <!--Style TextBlock-->
         <Style x:Key="txtStyle" TargetType="{x:Type TextBlock}">

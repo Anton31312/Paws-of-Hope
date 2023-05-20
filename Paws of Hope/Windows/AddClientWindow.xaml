@@ -37,7 +37,8 @@
                    HorizontalAlignment="Center"
                    FontWeight="Bold" 
                    OpacityMask="Black"
-                   Style="{DynamicResource txtStyle}">
+                   Style="{DynamicResource txtStyle}"
+                   x:Name="tbTitle">
             <TextBlock.Effect>
                 <DropShadowEffect BlurRadius="6" 
                                           Opacity="0.5" 
@@ -154,6 +155,7 @@
                      Foreground="LightGray"
                      VerticalContentAlignment="Center"
                      GotFocus="txtPhone_GotFocus"
+                     TextChanged="txtPhone_TextChanged"
                      LostFocus="txtPhone_LostFocus"/>
         </StackPanel>
 
@@ -208,8 +210,7 @@
                         Height="200"
                         Width="400"
                         Grid.RowSpan="5">
-                <Image x:Name="MainPhoto"
-                       Height="80">
+                <Image x:Name="MainPhoto">
                 </Image>
             </Border>
         </StackPanel>

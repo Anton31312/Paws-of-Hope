@@ -74,7 +74,7 @@
                            Margin="40 0 0 0"
                            Foreground="#ffffff"/>
                     <ComboBox x:Name="cbGender"
-                         Style="{DynamicResource cbRound}"
+                          Style="{DynamicResource cbRound}"
                          Height="58"
                          Width="286"
                               SelectionChanged="cbGender_SelectionChanged"/>

@@ -39,6 +39,20 @@ namespace Paws_of_Hope.Class
 
         }
 
+        public static List<string> GetAllTypePet()
+        {
+
+            return Context.TypePet.Select(p => p.NameTypePet).Distinct().ToList();
+
+        }
+
+        public static List<Tutor> GetAllTutor()
+        {
+
+            return Context.Tutor.ToList();
+
+        }
+
         public static List<Pet> GetAllPet()
         {
 

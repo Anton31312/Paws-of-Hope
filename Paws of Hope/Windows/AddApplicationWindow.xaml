@@ -37,7 +37,8 @@
                    HorizontalAlignment="Center"
                    FontWeight="Bold" 
                    OpacityMask="Black"
-                   Style="{DynamicResource txtStyle}">
+                   Style="{DynamicResource txtStyle}"
+                   x:Name="tbTitle">
             <TextBlock.Effect>
                 <DropShadowEffect BlurRadius="6" 
                                           Opacity="0.5" 

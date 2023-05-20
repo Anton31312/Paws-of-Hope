@@ -251,8 +251,7 @@
                         Height="200"
                         Width="400"
                         Grid.RowSpan="5">
-                <Image x:Name="MainPhoto"
-                       Height="80">
+                <Image x:Name="MainPhoto">
                 </Image>
             </Border>
         </StackPanel>

@@ -45,5 +45,19 @@ namespace Paws_of_Hope.Windows
                 MessageBox.Show("Пользователь с такими данными не найден!");
             }
         }
+
+        private void txtLogin_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox instance = (TextBox)sender;
+            if (instance.Text == instance.Tag.ToString())
+                instance.Text = "";
+        }
+
+        private void txtLogin_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox instance = (TextBox)sender;
+            if (string.IsNullOrWhiteSpace(instance.Text))
+                instance.Text = instance.Tag.ToString();
+        }
     }
 }

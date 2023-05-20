@@ -96,8 +96,13 @@
                      FontSize="24"
                      Width="580"
                      Height="60"
+                     Foreground="LightGray"
+                     Text="Введите логин"
+                     Tag="Введите логин"
                      VerticalContentAlignment="Center"
-                     Style="{DynamicResource txtRound}"/>
+                     Style="{DynamicResource txtRound}"
+                     GotFocus="txtLogin_GotFocus"
+                     LostFocus="txtLogin_LostFocus"/>
 
             <TextBlock Text="Пароль"
                        HorizontalAlignment="Left"

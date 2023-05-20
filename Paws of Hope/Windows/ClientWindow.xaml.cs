@@ -15,7 +15,6 @@ namespace Paws_of_Hope.Windows
     public partial class ClientWindow : Window
     {
         private int TotalPet = 0;
-        List<Client> clientList = new List<Client>();
 
         public ClientWindow()
         {
@@ -35,23 +34,20 @@ namespace Paws_of_Hope.Windows
 
         private void Filter()
         {
-            if (listClient is null)
-                return;
 
-            clientList = AppDate.Context.Client.ToList();
+            var clientList = AppDate.Context.Client.ToList();
+
             clientList = clientList.Where(i => i.LastName.ToLower().Contains(tbSearch.Text.ToLower()) ||
-            i.FirstName.ToLower().Contains(tbSearch.Text.ToLower()) || i.Patronymic.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            i.FirstName.ToLower().Contains(tbSearch.Text.ToLower()) || 
+            i.Patronymic.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+
             TotalPet = AppDate.GetAllClient().Count;
 
-
             listClient.ItemsSource = clientList;
-            UpdateItemAmountText();
-        }
 
-        private void UpdateItemAmountText()
-        {
             txtCountClient.Text = $"{clientList.Count} из {TotalPet}";
         }
+
 
         private void listClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
