@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WCF_Paws_of_Hope
+namespace WCF_ServiceAuth
 {
     class AppDate
     {

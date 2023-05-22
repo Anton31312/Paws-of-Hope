@@ -1,7 +1,6 @@
-﻿using Paws_of_Hope.EF;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 
-namespace WCF_Paws_of_Hope
+namespace WCF_ServiceAuth
 {
     public class ServerUser
     {

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные со сборкой.
-[assembly: AssemblyTitle("WCF_Paws_of_Hope")]
+[assembly: AssemblyTitle("WCF_ServiceAuth")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WCF_Paws_of_Hope")]
+[assembly: AssemblyProduct("WCF_ServiceAuth")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("0149347a-0d03-4103-9ff4-ea8bf8859f5a")]
+[assembly: Guid("e88bd730-8a7b-47bb-a193-7b485bddd2ba")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //

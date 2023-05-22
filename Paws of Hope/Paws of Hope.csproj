@@ -49,6 +49,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -72,6 +73,11 @@
     <Compile Include="ClassHelper\CurrentUser.cs" />
     <Compile Include="ClassHelper\Pet.cs" />
     <Compile Include="ClassHelper\Tutor.cs" />
+    <Compile Include="Connected Services\ServiceAuth\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddApplicationWindow.xaml.cs">
       <DependentUpon>AddApplicationWindow.xaml</DependentUpon>
     </Compile>
@@ -259,6 +265,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelPawsofHope.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Connected Services\ServiceAuth\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceAuth\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceAuth\ServiceAuth.wsdl" />
     <None Include="EF\ModelPawsofHope.edmx.diagram">
       <DependentUpon>ModelPawsofHope.edmx</DependentUpon>
     </None>
@@ -271,7 +284,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resourse\Logo\Logo.png" />
   </ItemGroup>
@@ -280,6 +295,13 @@
     <Resource Include="Resourse\Animal\cat standing.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\ServiceAuth\item.disco" />
+    <None Include="Connected Services\ServiceAuth\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceAuth\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceAuth\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="EF\ModelPawsofHope.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelPawsofHope.Context.cs</LastGenOutput>
@@ -302,6 +324,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceAuth\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
