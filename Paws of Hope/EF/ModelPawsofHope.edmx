@@ -48,6 +48,7 @@
           <Property Name="Phone" Type="nchar" MaxLength="12" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="150" />
           <Property Name="IDStatusClient" Type="int" Nullable="false" />
+          <Property Name="PhotoPath" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="ExecutedApplication">
           <Key>
@@ -183,24 +184,33 @@
         <EntityType Name="VW_PetTutor">
           <Key>
             <PropertyRef Name="TutorFullName" />
+            <PropertyRef Name="IDPet" />
             <PropertyRef Name="NamePet" />
             <PropertyRef Name="GenderPet" />
+            <PropertyRef Name="IDSizePet" />
+            <PropertyRef Name="NameSizePet" />
+            <PropertyRef Name="IDGender" />
             <PropertyRef Name="TypePet" />
             <PropertyRef Name="TypePetID" />
             <PropertyRef Name="ClientFullName" />
             <PropertyRef Name="AnimalShelteFullName" />
           </Key>
-          <Property Name="TutorFullName" Type="nvarchar" MaxLength="186" Nullable="false" />
+          <Property Name="TutorFullName" Type="nvarchar" MaxLength="156" Nullable="false" />
+          <Property Name="IDPet" Type="int" Nullable="false" />
           <Property Name="NamePet" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="AgePet" Type="int" />
           <Property Name="DiseasesPet" Type="nvarchar(max)" />
           <Property Name="GenderPet" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDSizePet" Type="int" Nullable="false" />
+          <Property Name="NameSizePet" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDGender" Type="int" Nullable="false" />
           <Property Name="TypePet" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="TypePetID" Type="int" Nullable="false" />
           <Property Name="HistoryPet" Type="nvarchar(max)" />
           <Property Name="ClientID" Type="int" />
           <Property Name="ClientFullName" Type="nvarchar" MaxLength="156" Nullable="false" />
           <Property Name="AnimalShelteFullName" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <Association Name="FK_AnimalShelterPet_AnimalShelter">
           <End Role="AnimalShelter" Type="Self.AnimalShelter" Multiplicity="1" />
@@ -521,16 +531,21 @@
           <EntitySet Name="VW_PetTutor" EntityType="Self.VW_PetTutor" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VW_PetTutor].[TutorFullName] AS [TutorFullName], 
+    [VW_PetTutor].[IDPet] AS [IDPet], 
     [VW_PetTutor].[NamePet] AS [NamePet], 
     [VW_PetTutor].[AgePet] AS [AgePet], 
     [VW_PetTutor].[DiseasesPet] AS [DiseasesPet], 
     [VW_PetTutor].[GenderPet] AS [GenderPet], 
+    [VW_PetTutor].[IDSizePet] AS [IDSizePet], 
+    [VW_PetTutor].[NameSizePet] AS [NameSizePet], 
+    [VW_PetTutor].[IDGender] AS [IDGender], 
     [VW_PetTutor].[TypePet] AS [TypePet], 
     [VW_PetTutor].[TypePetID] AS [TypePetID], 
     [VW_PetTutor].[HistoryPet] AS [HistoryPet], 
     [VW_PetTutor].[ClientID] AS [ClientID], 
     [VW_PetTutor].[ClientFullName] AS [ClientFullName], 
-    [VW_PetTutor].[AnimalShelteFullName] AS [AnimalShelteFullName]
+    [VW_PetTutor].[AnimalShelteFullName] AS [AnimalShelteFullName], 
+    [VW_PetTutor].[Photo] AS [Photo]
     FROM [dbo].[VW_PetTutor] AS [VW_PetTutor]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_AnimalShelterPet_AnimalShelter" Association="Self.FK_AnimalShelterPet_AnimalShelter">
@@ -664,6 +679,7 @@
           <Property Name="IDStatusClient" Type="Int32" Nullable="false" />
           <NavigationProperty Name="StatusClient" Relationship="Model.FK_Client_StatusClient" FromRole="Client" ToRole="StatusClient" />
           <NavigationProperty Name="Pet" Relationship="Model.FK_Pet_Client" FromRole="Client" ToRole="Pet" />
+          <Property Name="PhotoPath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ExecutedApplication">
           <Key>
@@ -792,8 +808,12 @@
             <PropertyRef Name="TypePetID" />
             <PropertyRef Name="ClientFullName" />
             <PropertyRef Name="AnimalShelteFullName" />
+            <PropertyRef Name="IDPet" />
+            <PropertyRef Name="IDGender" />
+            <PropertyRef Name="IDSizePet" />
+            <PropertyRef Name="NameSizePet" />
           </Key>
-          <Property Name="TutorFullName" Type="String" MaxLength="186" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TutorFullName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NamePet" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AgePet" Type="Int32" />
           <Property Name="DiseasesPet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -804,6 +824,11 @@
           <Property Name="ClientID" Type="Int32" />
           <Property Name="ClientFullName" Type="String" Nullable="false" MaxLength="156" FixedLength="false" Unicode="true" />
           <Property Name="AnimalShelteFullName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IDPet" Type="Int32" Nullable="false" />
+          <Property Name="IDGender" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IDSizePet" Type="Int32" Nullable="false" />
+          <Property Name="NameSizePet" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_ExecutedApplication_AnimalShelter">
           <End Role="AnimalShelter" Type="Self.AnimalShelter" Multiplicity="1" />
@@ -1191,6 +1216,7 @@
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="Model.Client">
               <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
                 <ScalarProperty Name="IDStatusClient" ColumnName="IDStatusClient" />
                 <ScalarProperty Name="IDClient" ColumnName="IDClient" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -1309,6 +1335,11 @@
           <EntitySetMapping Name="VW_PetTutor">
             <EntityTypeMapping TypeName="Model.VW_PetTutor">
               <MappingFragment StoreEntitySet="VW_PetTutor">
+                <ScalarProperty Name="NameSizePet" ColumnName="NameSizePet" />
+                <ScalarProperty Name="IDSizePet" ColumnName="IDSizePet" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
+                <ScalarProperty Name="IDPet" ColumnName="IDPet" />
                 <ScalarProperty Name="AnimalShelteFullName" ColumnName="AnimalShelteFullName" />
                 <ScalarProperty Name="ClientFullName" ColumnName="ClientFullName" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />

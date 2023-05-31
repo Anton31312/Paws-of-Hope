@@ -1,14 +1,12 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Paws_of_Hope.Class;
 using Paws_of_Hope.EF;
 
 namespace Paws_of_Hope.Windows
 {
-    /// <summary>
-    /// Логика взаимодействия для AuthWindow.xaml
-    /// </summary>
     public partial class AuthWindow : Window
     {
         bool isConnected = false;
@@ -25,11 +23,11 @@ namespace Paws_of_Hope.Windows
             client = new ServiceAuth.ServiceAuthClient();
         }
 
-        void ConnectUser() 
+        void ConnectUser(int IDuser, string login, string password) 
         {
             if (!isConnected)
             {
-                ID = client.Connect(txtLogin.Text, pbPassword.Password);
+                ID = client.Connect(IDuser, login, password);
                 isConnected = true;
             }
         }
@@ -45,14 +43,14 @@ namespace Paws_of_Hope.Windows
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            ConnectUser();
-            var userAuth = AppDate.Context.Tutor.ToList().Where(i => i.IDTutor == ID).FirstOrDefault();
+            
+            var userAuth = AppDate.Context.Tutor.ToList().FirstOrDefault(i => i.Login == txtLogin.Text & i.Password == pbPassword.Password);
             if (userAuth != null)
             {
+                ConnectUser(userAuth.IDTutor, userAuth.Login, userAuth.Password);
                 CurrentUser.FullName = string.Join(" ", new string[4] { "Наставник:", userAuth.LastName, userAuth.FirstName ,userAuth.Patronymic});
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
-                //this.Close();
             }
             else
             {
@@ -64,14 +62,22 @@ namespace Paws_of_Hope.Windows
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
+                
         }
 
         private void txtLogin_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }    
+                
         }
 
         private void Window_Closed(object sender, System.EventArgs e)

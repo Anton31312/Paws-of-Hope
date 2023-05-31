@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using Paws_of_Hope.Class;
 using System;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,9 +9,6 @@ using System.Windows.Media.Imaging;
 
 namespace Paws_of_Hope.Windows
 {
-    /// <summary>
-    /// Логика взаимодействия для AddClientWindow.xaml
-    /// </summary>
     public partial class AddClientWindow : Window
     {
         EF.Client editClient = new EF.Client();
@@ -26,33 +22,19 @@ namespace Paws_of_Hope.Windows
             var gender = AppDate.GetAllGender();
             gender.Insert(0, "Выберите пол");
             cbGender.ItemsSource = gender;
+            cbGender.SelectedIndex = 0;
 
             var status = AppDate.GetAllStatus();
             status.Insert(0, "Выберите статус");
             cbStatusClient.ItemsSource = status;
+            cbStatusClient.SelectedIndex = 0;
 
-            bool isEdit = false;
+            isEdit = false;
         }
 
         public AddClientWindow(EF.Client client)
         {
             InitializeComponent();
-
-            // add image
-            //if (client.Photo != null)
-            //{
-            //    using (MemoryStream stream = new MemoryStream(client))
-            //    {
-            //        BitmapImage bitmapImage = new BitmapImage();
-            //        bitmapImage.BeginInit();
-            //        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            //        bitmapImage.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-            //        bitmapImage.StreamSource = stream;
-            //        bitmapImage.EndInit();
-            //        MainPhoto.Source = bitmapImage;
-
-            //    }
-            //}
 
             //edit combobox
             cbGender.ItemsSource = AppDate.Context.Gender.ToList();
@@ -249,12 +231,6 @@ namespace Paws_of_Hope.Windows
                         client.Patronymic = txtPatronymic.Text;
                         client.IDStatusClient = cbStatusClient.SelectedIndex + 1;
                         client.IDGender = cbGender.SelectedIndex + 1;
-
-                        if (pathPhoto != null)
-                        {
-                            //pet.PhotoPath = File.ReadAllBytes(pathPhoto);
-                        }
-
 
                         AppDate.Context.Client.Add(client);
                         AppDate.Context.SaveChanges();

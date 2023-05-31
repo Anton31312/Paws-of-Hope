@@ -2,31 +2,33 @@
 using Paws_of_Hope.EF;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Paws_of_Hope.Windows
 {
-    /// <summary>
-    /// Логика взаимодействия для ClientWindow.xaml
-    /// </summary>
     public partial class ClientWindow : Window
     {
         private int TotalPet = 0;
+        
 
         public ClientWindow()
         {
             InitializeComponent();
-
+            listClient.ItemsSource = AppDate.Context.Client.ToList();
             var status = AppDate.GetAllStatus();
             status.Insert(0, "По умолчанию");
             cbStatusClient.ItemsSource = status;
+            cbStatusClient.SelectedIndex = 0;
 
             var gender = AppDate.GetAllGender();
             gender.Insert(0, "По умолчанию");
             cbGender.ItemsSource = gender;
+            cbGender.SelectedIndex = 0;
 
             Filter();
 
@@ -34,12 +36,12 @@ namespace Paws_of_Hope.Windows
 
         private void Filter()
         {
-
-            var clientList = AppDate.Context.Client.ToList();
-
+            if (listClient is null)
+                return;
+            List<Client> clientList = new List<Client>();
+            clientList = AppDate.Context.Client.ToList();
             clientList = clientList.Where(i => i.LastName.ToLower().Contains(tbSearch.Text.ToLower()) ||
-            i.FirstName.ToLower().Contains(tbSearch.Text.ToLower()) || 
-            i.Patronymic.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            i.FirstName.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
 
             TotalPet = AppDate.GetAllClient().Count;
 
@@ -141,14 +143,20 @@ namespace Paws_of_Hope.Windows
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
         }
 
         private void tbSearch_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }
         }
 
         private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)

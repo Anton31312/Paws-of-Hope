@@ -210,31 +210,24 @@
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Border CornerRadius="100"
-                        BorderThickness="2"
-                        BorderBrush="Black"
-                        Height="130"
-                        Width="130"
-                        Grid.RowSpan="5">
-                                    <Image x:Name="MainPhoto"
-                       Height="80"
-                       >
-                                        <Image.Source>
-                                            <Binding Path ="Photo">
-                                                <Binding.TargetNullValue>
-                                                    <ImageSource>/Resourse/nophoto.jpg</ImageSource>
-                                                </Binding.TargetNullValue>
-                                            </Binding>
-                                        </Image.Source>
-                                    </Image>
+                                        BorderThickness="2"
+                                        BorderBrush="Black"
+                                        Height="130"
+                                        Width="130"
+                                        Grid.RowSpan="5">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding Photo, TargetNullValue='/Resourse/nophoto.jpg'}"/>
+                                    </Border.Background>
+
                                 </Border>
                                 <TextBlock Text="{Binding NamePet}"
-                           HorizontalAlignment="Left"
-                           FontSize="28"
-                           Grid.Column="1"
-                           Grid.ColumnSpan="2"
-                           FontWeight="SemiBold"
-                           VerticalAlignment="Center"
-                           Style="{DynamicResource txtStyle}"/>
+                                           HorizontalAlignment="Left"
+                                           FontSize="28"
+                                           Grid.Column="1"
+                                           Grid.ColumnSpan="2"
+                                           FontWeight="SemiBold"
+                                           VerticalAlignment="Center"
+                                           Style="{DynamicResource txtStyle}"/>
 
                                 <TextBlock Text="{Binding GetAge}"
                            HorizontalAlignment="Left"
@@ -281,7 +274,7 @@
                            Grid.Column="2"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="{Binding GetDisas}"
+                                <TextBlock Text="{Binding GetDisas, FallbackValue='Болезни: нет информации'}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontWeight="Regular"
@@ -290,7 +283,7 @@
                            Grid.Column="2"
                            Style="{DynamicResource txtStyle}"/>
 
-                                <TextBlock Text="{Binding GetHistory}"
+                                <TextBlock Text="{Binding GetHistory, FallbackValue='История: нет информации'}"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontWeight="Regular"

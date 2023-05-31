@@ -75,9 +75,9 @@
                            Margin="40 0 0 0"
                            Foreground="#ffffff"/>
                     <ComboBox x:Name="cbStatusClient"
-                         Style="{DynamicResource cbRound}"
-                         Height="58"
-                         Width="286"
+                              Style="{DynamicResource cbRound}"
+                              Height="58"
+                              Width="286"
                               SelectionChanged="cbStatusClient_SelectionChanged"/>
                 </StackPanel>
             </StackPanel>
@@ -143,8 +143,8 @@
                             Height="190"
                             Width="935"
                             Margin="5"
-                BorderThickness="2"
-                BorderBrush="#000000"
+                            BorderThickness="2"
+                            BorderBrush="{Binding Path=GetColor}"
                             CornerRadius="10">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -163,7 +163,6 @@
                                 <TextBlock Text="{Binding GetFullNameClient}"
                            HorizontalAlignment="Left"
                            FontSize="28"
-                           Grid.Column="1"
                            Grid.ColumnSpan="2"
                            FontWeight="SemiBold"
                            VerticalAlignment="Center"
@@ -175,7 +174,6 @@
                            FontWeight="Regular"
                            FontSize="16"
                            Grid.Row="1"
-                           Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
                                 <TextBlock Text="{Binding GetWishes}"
@@ -184,7 +182,6 @@
                            FontWeight="Regular"
                            FontSize="16"
                            Grid.Row="2"
-                           Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
                                 <TextBlock Text="{Binding GetDateApp}"
@@ -193,7 +190,6 @@
                            FontWeight="Regular"
                            FontSize="16"
                            Grid.Row="3"
-                           Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
                                 <TextBlock Text="{Binding GetStatus}"
@@ -202,7 +198,7 @@
                            FontWeight="Regular"
                            FontSize="16"
                            Grid.Row="1"
-                           Grid.Column="2"
+                           Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
 
                                 <TextBlock Text="{Binding GetGender}"
@@ -211,7 +207,7 @@
                            FontWeight="Regular"
                            FontSize="16"
                            Grid.Row="2"
-                           Grid.Column="2"
+                           Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
                                 
                                 <TextBlock Text="{Binding GetAge}"
@@ -220,7 +216,7 @@
                            FontWeight="Regular"
                            FontSize="16"
                            Grid.Row="3"
-                           Grid.Column="2"
+                           Grid.Column="1"
                            Style="{DynamicResource txtStyle}"/>
                             </Grid>
                         </Border>

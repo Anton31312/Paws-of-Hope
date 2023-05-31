@@ -295,6 +295,13 @@
     <Resource Include="Resourse\Animal\cat standing.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resourse\Client\efim.png" />
+    <Resource Include="Resourse\Client\innes.png" />
+    <Resource Include="Resourse\Client\vil.png" />
+    <Resource Include="Resourse\PetAnim\Barni.jpg" />
+    <Resource Include="Resourse\PetAnim\Brina.jpg" />
+    <Resource Include="Resourse\PetAnim\Bruno.png" />
+    <Resource Include="Resourse\PetAnim\Zevs.png" />
     <None Include="Connected Services\ServiceAuth\item.disco" />
     <None Include="Connected Services\ServiceAuth\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceAuth\configuration.svcinfo" />
@@ -328,5 +335,6 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceAuth\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

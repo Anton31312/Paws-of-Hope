@@ -12,7 +12,7 @@ namespace WCF_ServiceAuth
     public interface IServiceAuth
     {
         [OperationContract]
-        int Connect(string login, string password);
+        int Connect(int ID, string login, string password);
 
         [OperationContract]
         void Disconnect(int id);

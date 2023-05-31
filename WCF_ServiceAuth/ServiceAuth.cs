@@ -8,15 +8,13 @@ namespace WCF_ServiceAuth
     public class ServiceAuth : IServiceAuth
     {
         List<ServerUser> users = new List<ServerUser>();
-        public int Connect(string login, string password)
+        public int Connect(int ID, string login, string password)
         {
-            var userAuth = AppDate.Context.Tutor.ToList().
-                Where(i => i.Login == login && i.Password == password).FirstOrDefault();
             ServerUser user = new ServerUser()
             {
-                ID = userAuth.IDTutor,
-                Login = userAuth.Login,
-                Password = userAuth.Password,
+                ID = ID,
+                Login = login,
+                Password = password,
                 operationContext = OperationContext.Current
             };
 

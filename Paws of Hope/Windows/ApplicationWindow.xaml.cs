@@ -49,13 +49,10 @@ namespace Paws_of_Hope.Windows
 
 
             listApplicationClient.ItemsSource = appList;
-            UpdateItemAmountText();
-        }
-
-        private void UpdateItemAmountText()
-        {
             txtCountApp.Text = $"{appList.Count} из {TotalPet}";
         }
+
+        
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -84,14 +81,20 @@ namespace Paws_of_Hope.Windows
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
         }
 
         private void tbSearch_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }
         }
 
         private void listApplicationClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)

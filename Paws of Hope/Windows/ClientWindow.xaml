@@ -186,16 +186,9 @@
                                         Height="130"
                                         Width="130"
                                         Grid.RowSpan="5">
-                                    <Image x:Name="MainPhoto"
-                                           Height="80">
-                                        <Image.Source>
-                                            <Binding Path ="Photo">
-                                                <Binding.TargetNullValue>
-                                                    <ImageSource>/Resourse/nophoto.jpg</ImageSource>
-                                                </Binding.TargetNullValue>
-                                            </Binding>
-                                        </Image.Source>
-                                    </Image>
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding PhotoPath, TargetNullValue='/Resourse/nophoto.jpg'}"/>
+                                    </Border.Background>
                                 </Border>
                                 <TextBlock Text="{Binding GetFullName}"
                                            HorizontalAlignment="Left"

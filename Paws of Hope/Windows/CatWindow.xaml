@@ -180,8 +180,8 @@
                             Height="190"
                             Width="935"
                             Margin="5"
-                BorderThickness="2"
-                BorderBrush="#000000"
+                            BorderThickness="2"
+                            BorderBrush="#000000"
                             CornerRadius="10">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -198,22 +198,14 @@
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Border CornerRadius="100"
-                        BorderThickness="2"
-                        BorderBrush="Black"
-                        Height="130"
-                        Width="130"
-                        Grid.RowSpan="5">
-                                    <Image x:Name="MainPhoto"
-                       Height="80"
-                       >
-                                        <Image.Source>
-                                            <Binding Path ="Photo">
-                                                <Binding.TargetNullValue>
-                                                    <ImageSource>/Resourse/nophoto.jpg</ImageSource>
-                                                </Binding.TargetNullValue>
-                                            </Binding>
-                                        </Image.Source>
-                                    </Image>
+                                        BorderThickness="2"
+                                        BorderBrush="Black"
+                                        Height="130"
+                                        Width="130"
+                                        Grid.RowSpan="5">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding Photo, TargetNullValue='/Resourse/nophoto.jpg'}"/>
+                                    </Border.Background>
                                 </Border>
                                 <TextBlock Text="{Binding NamePet}"
                            HorizontalAlignment="Left"

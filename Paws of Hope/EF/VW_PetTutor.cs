@@ -25,5 +25,10 @@ namespace Paws_of_Hope.EF
         public Nullable<int> ClientID { get; set; }
         public string ClientFullName { get; set; }
         public string AnimalShelteFullName { get; set; }
+        public int IDPet { get; set; }
+        public int IDGender { get; set; }
+        public string Photo { get; set; }
+        public int IDSizePet { get; set; }
+        public string NameSizePet { get; set; }
     }
 }

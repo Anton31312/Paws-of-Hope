@@ -10,10 +10,10 @@ namespace Paws_of_Hope.Windows
     /// </summary>
     public partial class InformationPetWindow : Window
     {
-        EF.Pet editPet = new EF.Pet();
+        EF.VW_PetTutor editPet = new EF.VW_PetTutor();
 
 
-        public InformationPetWindow(EF.Pet pet)
+        public InformationPetWindow(EF.VW_PetTutor pet)
         {
             InitializeComponent();
 
@@ -40,12 +40,12 @@ namespace Paws_of_Hope.Windows
             //get value
             txtPetName.Text = editPet.NamePet;
             cbGender.SelectedIndex = editPet.IDGender - 1;
-            //cbPetHoz.SelectedIndex = (int)(editPet.IDClient - 1);
-            if (pet.IDTypePet == 1)
+            cbPetHoz.SelectedIndex = (int)(editPet.ClientID - 1);
+            if (pet.TypePetID == 1)
             {
                 cbSizePet.SelectedIndex = (int)(editPet.IDSizePet - 1);
             }
-            cbTypePet.SelectedIndex = editPet.IDTypePet - 1;
+            cbTypePet.SelectedIndex = editPet.TypePetID - 1;
         }
 
         private void btnEditPet_Click(object sender, RoutedEventArgs e)
@@ -55,13 +55,13 @@ namespace Paws_of_Hope.Windows
 
         private void btnBackPet_Click(object sender, RoutedEventArgs e)
         {
-            if (editPet.IDTypePet != 2)
+            if (editPet.TypePetID != 2)
             {
                 CatWindow catWindow = new CatWindow();
                 catWindow.Show();
                 this.Close();
             }
-            else if (editPet.IDTypePet == 1)
+            else if (editPet.TypePetID == 1)
             {
                 DogWindow dogWindow = new DogWindow();
                 dogWindow.Show();

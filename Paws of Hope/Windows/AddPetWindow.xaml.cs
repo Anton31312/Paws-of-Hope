@@ -1,19 +1,10 @@
 ﻿using Microsoft.Win32;
 using Paws_of_Hope.Class;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Paws_of_Hope.Windows
 {
@@ -22,7 +13,7 @@ namespace Paws_of_Hope.Windows
     /// </summary>
     public partial class AddPetWindow : Window
     {
-        EF.Pet editPet = new EF.Pet();
+        EF.VW_PetTutor editPet = new EF.VW_PetTutor();
         bool isEdit = true; // изменяем или добавляем пользователя
         string pathPhoto = null; // Для сохранения пути к изображению
 
@@ -162,12 +153,12 @@ namespace Paws_of_Hope.Windows
                 {
                     //изменение читателя
                     editPet.NamePet = txtPetName.Text;
-                    editPet.Diseases = txtPetDisas.Text;
-                    editPet.History = txtPetHistory.Text;
-                    editPet.Age = Convert.ToInt32(txtPetAge.Text);
-                    editPet.IDTypePet = cbTypePet.SelectedIndex + 1;
+                    editPet.DiseasesPet = txtPetDisas.Text;
+                    editPet.HistoryPet = txtPetHistory.Text;
+                    editPet.AgePet = Convert.ToInt32(txtPetAge.Text);
+                    editPet.TypePetID = cbTypePet.SelectedIndex + 1;
                     editPet.IDSizePet = cbSizePet.SelectedIndex + 1;
-                    editPet.IDClient = cbPetHoz.SelectedIndex + 1;
+                    editPet.ClientID = cbPetHoz.SelectedIndex + 1;
                     editPet.IDGender = cbGender.SelectedIndex + 1;
 
                     if (pathPhoto != null)
@@ -192,14 +183,14 @@ namespace Paws_of_Hope.Windows
                     if (resultClick == MessageBoxResult.Yes)
                     {
                         //Добавление нового питомца
-                        EF.Pet pet = new EF.Pet();
+                        EF.VW_PetTutor pet = new EF.VW_PetTutor();
                         pet.NamePet = txtPetName.Text;
-                        pet.Diseases = txtPetDisas.Text;
-                        pet.History = txtPetHistory.Text;
-                        pet.Age = Convert.ToInt32(txtPetAge.Text);
-                        pet.IDTypePet = cbTypePet.SelectedIndex + 1;
+                        pet.DiseasesPet = txtPetDisas.Text;
+                        pet.HistoryPet = txtPetHistory.Text;
+                        pet.AgePet = Convert.ToInt32(txtPetAge.Text);
+                        pet.TypePetID = cbTypePet.SelectedIndex + 1;
                         pet.IDSizePet = cbSizePet.SelectedIndex + 1;
-                        pet.IDClient = cbPetHoz.SelectedIndex + 1;
+                        pet.ClientID = cbPetHoz.SelectedIndex + 1;
                         pet.IDGender = cbGender.SelectedIndex + 1;
 
                         if (pathPhoto != null)
@@ -208,7 +199,7 @@ namespace Paws_of_Hope.Windows
                         }
 
 
-                        AppDate.Context.Pet.Add(pet);
+                        AppDate.Context.VW_PetTutor.Add(pet);
                         AppDate.Context.SaveChanges();
                         MessageBox.Show("Питомец успешно добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                         this.Close();

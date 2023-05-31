@@ -3,16 +3,10 @@ using Paws_of_Hope.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Paws_of_Hope.Windows
 {
@@ -40,10 +34,12 @@ namespace Paws_of_Hope.Windows
             var animalShelter = AppDate.GetAllAnimalShelter();
             animalShelter.Insert(0, "Все приюты");
             cbShelter.ItemsSource = animalShelter;
+            cbShelter.SelectedIndex = 0;
 
             var gender = AppDate.GetAllGender();
             gender.Insert(0, "По умолчанию");
             cbGender.ItemsSource = gender;
+            cbGender.SelectedIndex = 0;
 
             cbAge.ItemsSource = listAge;
             cbAge.SelectedIndex = 0;
@@ -82,13 +78,9 @@ namespace Paws_of_Hope.Windows
 
             listCat.ItemsSource = petList;
 
-            UpdateItemAmountText();
-        }
-
-        private void UpdateItemAmountText()
-        {
             txtCountProd.Text = $"{petList.Count} из {TotalPet}";
         }
+
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -101,15 +93,15 @@ namespace Paws_of_Hope.Windows
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (listCat.SelectedItem is EF.Pet)
+            if (listCat.SelectedItem is EF.VW_PetTutor)
             {
                 try
                 {
-                    var item = listCat.SelectedItem as EF.Pet;
+                    var item = listCat.SelectedItem as EF.VW_PetTutor;
                     var resultClick = MessageBox.Show("Вы уверены?", "Подтвердите удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (resultClick == MessageBoxResult.Yes)
                     {
-                        AppDate.Context.Pet.Remove(item);
+                        AppDate.Context.VW_PetTutor.Remove(item);
                         AppDate.Context.SaveChanges();
                         MessageBox.Show("Питомец успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                         Filter();
@@ -124,11 +116,11 @@ namespace Paws_of_Hope.Windows
 
         private void listCat_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var editCat = new EF.Pet();
+            var editCat = new EF.VW_PetTutor();
 
-            if (listCat.SelectedItem is EF.Pet)
+            if (listCat.SelectedItem is EF.VW_PetTutor)
             {
-                editCat = listCat.SelectedItem as EF.Pet;
+                editCat = listCat.SelectedItem as EF.VW_PetTutor;
             }
             InformationPetWindow informationPetWindow = new InformationPetWindow(editCat);
             this.Opacity = 0.2;
@@ -155,15 +147,15 @@ namespace Paws_of_Hope.Windows
         {
             if (e.Key == Key.Delete)
             {
-                if (listCat.SelectedItem is EF.Pet)
+                if (listCat.SelectedItem is EF.VW_PetTutor)
                 {
                     try
                     {
-                        var item = listCat.SelectedItem as EF.Pet;
+                        var item = listCat.SelectedItem as EF.VW_PetTutor;
                         var resultClick = MessageBox.Show("Вы уверены?", "Подтвердите удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (resultClick == MessageBoxResult.Yes)
                         {
-                            AppDate.Context.Pet.Remove(item);
+                            AppDate.Context.VW_PetTutor.Remove(item);
                             AppDate.Context.SaveChanges();
                             MessageBox.Show("Питомец успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                             Filter();
@@ -182,14 +174,20 @@ namespace Paws_of_Hope.Windows
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
         }
 
         private void tbSearch_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }
         }
 
         private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)

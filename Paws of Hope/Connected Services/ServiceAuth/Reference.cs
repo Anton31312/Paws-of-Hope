@@ -16,10 +16,10 @@ namespace Paws_of_Hope.ServiceAuth {
     public interface IServiceAuth {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAuth/Connect", ReplyAction="http://tempuri.org/IServiceAuth/ConnectResponse")]
-        int Connect(string login, string password);
+        int Connect(int ID, string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAuth/Connect", ReplyAction="http://tempuri.org/IServiceAuth/ConnectResponse")]
-        System.Threading.Tasks.Task<int> ConnectAsync(string login, string password);
+        System.Threading.Tasks.Task<int> ConnectAsync(int ID, string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAuth/Disconnect", ReplyAction="http://tempuri.org/IServiceAuth/DisconnectResponse")]
         void Disconnect(int id);
@@ -55,12 +55,12 @@ namespace Paws_of_Hope.ServiceAuth {
                 base(binding, remoteAddress) {
         }
         
-        public int Connect(string login, string password) {
-            return base.Channel.Connect(login, password);
+        public int Connect(int ID, string login, string password) {
+            return base.Channel.Connect(ID, login, password);
         }
         
-        public System.Threading.Tasks.Task<int> ConnectAsync(string login, string password) {
-            return base.Channel.ConnectAsync(login, password);
+        public System.Threading.Tasks.Task<int> ConnectAsync(int ID, string login, string password) {
+            return base.Channel.ConnectAsync(ID, login, password);
         }
         
         public void Disconnect(int id) {

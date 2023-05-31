@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WCF_ServiceAuth
 {
-    class AppDate
+    public class AppDate
     {
         public static Paws_of_Hope.EF.AnimalShelterEntities Context { get; } = new Paws_of_Hope.EF.AnimalShelterEntities();
     }
