@@ -19,22 +19,22 @@ namespace Paws_of_Hope.Windows
 
             editPet = pet;
             //add combobox
-            cbAnimalShelter.ItemsSource = AppDate.Context.AnimalShelter.ToList();
+            cbAnimalShelter.ItemsSource = AppDate.context.AnimalShelter.ToList();
             cbAnimalShelter.DisplayMemberPath = "NameAnimalShelter";
 
-            cbGender.ItemsSource = AppDate.Context.Gender.ToList();
+            cbGender.ItemsSource = AppDate.context.Gender.ToList();
             cbGender.DisplayMemberPath = "NameGender";
 
-            cbPetHoz.ItemsSource = AppDate.Context.Client.ToList();
+            cbPetHoz.ItemsSource = AppDate.context.Client.ToList();
             cbPetHoz.DisplayMemberPath = "LastName";
 
-            cbTypePet.ItemsSource = AppDate.Context.TypePet.ToList();
+            cbTypePet.ItemsSource = AppDate.context.TypePet.ToList();
             cbTypePet.DisplayMemberPath = "NameTypePet";
 
-            cbTutor.ItemsSource = AppDate.Context.Tutor.ToList();
+            cbTutor.ItemsSource = AppDate.context.Tutor.ToList();
             cbTutor.DisplayMemberPath = "LastName";
 
-            cbSizePet.ItemsSource = AppDate.Context.SizePet.ToList();
+            cbSizePet.ItemsSource = AppDate.context.SizePet.ToList();
             cbSizePet.DisplayMemberPath = "NameSizePet";
 
             //get value
@@ -55,7 +55,7 @@ namespace Paws_of_Hope.Windows
 
         private void btnBackPet_Click(object sender, RoutedEventArgs e)
         {
-            if (editPet.TypePetID != 2)
+            if (editPet.TypePetID == 2)
             {
                 CatWindow catWindow = new CatWindow();
                 catWindow.Show();

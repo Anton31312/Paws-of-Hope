@@ -52,9 +52,12 @@ namespace Paws_of_Hope.Windows
             if (listCat is null)
                 return;
 
-            petList = AppDate.Context.VW_PetTutor.Where(i => i.TypePetID == 2).ToList();
-            petList = petList.Where(i => i.NamePet.ToLower().Contains(tbSearch.Text.ToLower()) ||
-                            i.AnimalShelteFullName.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            petList = AppDate.context.VW_PetTutor.Where(i => i.TypePetID == 2).ToList();
+
+            if (tbSearch.Text != "Введите имя")
+            {
+                petList = petList.Where(i => i.NamePet.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            }
             TotalPet = AppDate.GetAllPet().Count;
 
             switch (cbAge.SelectedIndex)
@@ -63,13 +66,13 @@ namespace Paws_of_Hope.Windows
                     petList = petList.OrderBy(i => i.NamePet).ToList();
                     break;
                 case 1:
-                    petList = petList.OrderBy(i => Convert.ToInt32(i.AgePet) <= 3).ToList();
+                    petList = petList.OrderBy(i => i.AgePet <= 3).ToList();
                     break;
                 case 2:
-                    petList = petList.OrderBy(i => Convert.ToInt32(i.AgePet) >= 4 & Convert.ToInt32(i.AgePet) <= 8).ToList();
+                    petList = petList.OrderBy(i => i.AgePet >= 4 & i.AgePet <= 8).ToList();
                     break;
                 case 3:
-                    petList = petList.OrderBy(i => Convert.ToInt32(i.AgePet) >= 9).ToList();
+                    petList = petList.OrderBy(i => i.AgePet >= 9).ToList();
                     break;
                 default:
                     petList = petList.OrderBy(i => i.NamePet).ToList();
@@ -101,8 +104,8 @@ namespace Paws_of_Hope.Windows
                     var resultClick = MessageBox.Show("Вы уверены?", "Подтвердите удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (resultClick == MessageBoxResult.Yes)
                     {
-                        AppDate.Context.VW_PetTutor.Remove(item);
-                        AppDate.Context.SaveChanges();
+                        AppDate.context.VW_PetTutor.Remove(item);
+                        AppDate.context.SaveChanges();
                         MessageBox.Show("Питомец успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                         Filter();
                     }
@@ -155,8 +158,8 @@ namespace Paws_of_Hope.Windows
                         var resultClick = MessageBox.Show("Вы уверены?", "Подтвердите удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (resultClick == MessageBoxResult.Yes)
                         {
-                            AppDate.Context.VW_PetTutor.Remove(item);
-                            AppDate.Context.SaveChanges();
+                            AppDate.context.VW_PetTutor.Remove(item);
+                            AppDate.context.SaveChanges();
                             MessageBox.Show("Питомец успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                             Filter();
                         }

@@ -25,10 +25,12 @@ namespace Paws_of_Hope.Windows
             var gender = AppDate.GetAllGender();
             gender.Insert(0, "Выберите пол");
             cbGender.ItemsSource = gender;
+            cbGender.SelectedIndex = 0;
 
             var size = AppDate.GetAllSize();
             size.Insert(0, "Выберите размер");
             cbSizePet.ItemsSource = size;
+            cbSizePet.SelectedIndex = 0;
 
             var client = AppDate.GetAllClient();
             cbHoz.ItemsSource = client;
@@ -36,6 +38,7 @@ namespace Paws_of_Hope.Windows
             var typePet = AppDate.GetAllTypePet();
             typePet.Insert(0, "Выберите тип питомца");
             cbTypePet.ItemsSource = typePet;
+            cbTypePet.SelectedIndex = 0;
         }
 
         public AddApplicationWindow(EF.ExecutedApplication application)
@@ -43,23 +46,23 @@ namespace Paws_of_Hope.Windows
             InitializeComponent();
 
             //edit combobox
-            cbGender.ItemsSource = AppDate.Context.Gender.ToList();
+            cbGender.ItemsSource = AppDate.context.Gender.ToList();
             cbGender.DisplayMemberPath = "NameGender";
 
             //edit TItle and content button
-            tbTitle.Text = "Изменить данные клиента";
+            tbTitle.Text = "Изменить данные заявки";
             btnAddApplication.Content = "Изменить";
 
             //Get value
             editApplication = application;
      
-            cbGender.SelectedIndex = editApplication.Pet.Gender.IDGender - 1;
-            cbTypePet.SelectedIndex = editApplication.Pet.TypePet.IDTypePet - 1;
-            cbSizePet.SelectedIndex = editApplication.Pet.SizePet.IDSizePet - 1;
+            cbGender.SelectedIndex = editApplication.Pet.IDGender - 1;
+            cbTypePet.SelectedIndex = editApplication.Pet.IDTypePet - 1;
+            cbSizePet.SelectedIndex = (int)(editApplication.Pet.IDSizePet - 1);
             cbHoz.SelectedIndex = editApplication.Application.Client.IDClient - 1;
             cbPet.SelectedIndex = editApplication.Pet.IDPet - 1;
             txtAgePet.Text = Convert.ToString(editApplication.Pet.Age);
-            txtPetWish.Text =editApplication.Application.Wishes;
+            txtPetWish.Text = editApplication.Application.Wishes;
 
             isEdit = true;
         }
@@ -113,15 +116,15 @@ namespace Paws_of_Hope.Windows
                 try
                 {
                     //изменение читателя
-                    editApplication.Pet.TypePet.IDTypePet = cbTypePet.SelectedIndex + 1;
-                    editApplication.Pet.SizePet.IDSizePet = cbTypePet.SelectedIndex + 1;
+                    editApplication.Pet.IDTypePet = cbTypePet.SelectedIndex + 1;
+                    editApplication.Pet.IDSizePet = cbTypePet.SelectedIndex + 1;
                     editApplication.Pet.Age = Convert.ToInt32(txtAgePet.Text);
                     editApplication.Application.Wishes = txtPetWish.Text;
-                    editApplication.Pet.Gender.IDGender = cbGender.SelectedIndex + 1;
+                    editApplication.Pet.IDGender = cbGender.SelectedIndex + 1;
                     editApplication.Pet.IDPet = cbPet.SelectedIndex + 1;
                     editApplication.Application.Client.IDClient = cbHoz.SelectedIndex + 1;
 
-                    AppDate.Context.SaveChanges();
+                    AppDate.context.SaveChanges();
                     MessageBox.Show("Данные о заявке успешно изменены", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                 }
@@ -139,16 +142,16 @@ namespace Paws_of_Hope.Windows
                     {
                         //Добавление нового читателя
                         EF.ExecutedApplication application = new EF.ExecutedApplication();
-                        editApplication.Pet.TypePet.IDTypePet = cbTypePet.SelectedIndex + 1;
-                        editApplication.Pet.SizePet.IDSizePet = cbTypePet.SelectedIndex + 1;
+                        editApplication.Pet.IDTypePet = cbTypePet.SelectedIndex + 1;
+                        editApplication.Pet.IDSizePet = cbTypePet.SelectedIndex + 1;
                         editApplication.Pet.Age = Convert.ToInt32(txtAgePet.Text);
-                        editApplication.Pet.Gender.IDGender = cbGender.SelectedIndex + 1;
+                        editApplication.Pet.IDGender = cbGender.SelectedIndex + 1;
                         editApplication.Pet.IDPet = cbPet.SelectedIndex + 1;
                         editApplication.Application.Client.IDClient = cbHoz.SelectedIndex + 1;
                         editApplication.Application.Wishes = txtPetWish.Text;
 
-                        AppDate.Context.ExecutedApplication.Add(application);
-                        AppDate.Context.SaveChanges();
+                        AppDate.context.ExecutedApplication.Add(application);
+                        AppDate.context.SaveChanges();
                         MessageBox.Show("Данные о заявке успешно добавлены!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                         this.Close();
                     }

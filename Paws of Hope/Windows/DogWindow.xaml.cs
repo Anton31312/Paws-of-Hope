@@ -14,8 +14,6 @@ namespace Paws_of_Hope.Windows
     {
         private int TotalPet = 0;
 
-        List<VW_PetTutor> petList = new List<VW_PetTutor>();
-
         List<string> listAge = new List<string>()
         {
             "По умолчанию",
@@ -27,7 +25,7 @@ namespace Paws_of_Hope.Windows
         public DogWindow()
         {
             InitializeComponent();
-            listDog.ItemsSource = AppDate.Context.VW_PetTutor.ToList();
+            
 
             var animalShelter = AppDate.GetAllAnimalShelter();
             animalShelter.Insert(0, "Все приюты");
@@ -40,7 +38,7 @@ namespace Paws_of_Hope.Windows
             cbGender.SelectedIndex = 0;
 
             cbAge.ItemsSource = listAge;
-            cbAge.SelectedIndex = 1;
+            cbAge.SelectedIndex = 0;
 
             var size = AppDate.GetAllSize();
             size.Insert(0, "По умолчанию");
@@ -55,27 +53,50 @@ namespace Paws_of_Hope.Windows
             if (listDog is null)
                 return;
 
-            petList = AppDate.Context.VW_PetTutor.Where(i => i.TypePetID == 1).ToList();
-            petList = petList.Where(i => i.NamePet.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            List<VW_PetTutor> petList = new List<VW_PetTutor>();
+
+            petList = AppDate.context.VW_PetTutor.Where(i => i.TypePetID == 1).ToList();
+
+            // Поиск 
+            if (tbSearch.Text != "Введите имя")
+            {
+                petList = petList.Where(i => i.NamePet.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            }
             TotalPet = AppDate.GetAllPet().Count;
 
+            // Сортировка
             switch (cbAge.SelectedIndex)
             {
                 case 1:
                     petList = petList.OrderBy(i => i.IDPet).ToList();
                     break;
                 case 2:
-                    petList = petList.OrderBy(i => Convert.ToInt32(i.AgePet) <= 3).ToList();
+                    petList = petList.OrderBy(i => i.AgePet <= 3).ToList();
                     break;
                 case 3:
-                    petList = petList.OrderBy(i => Convert.ToInt32(i.AgePet) >= 4 & Convert.ToInt32(i.AgePet) <= 8).ToList();
+                    petList = petList.OrderBy(i => i.AgePet >= 4 & i.AgePet <= 8).ToList();
                     break;
                 case 4:
-                    petList = petList.OrderBy(i => Convert.ToInt32(i.AgePet) >= 9).ToList();
+                    petList = petList.OrderBy(i => i.AgePet >= 9).ToList();
                     break;
                 default:
                     petList = petList.OrderBy(i => i.IDPet).ToList();
                     break;
+            }
+
+            if (cbGender.SelectedIndex != 0)
+            {
+                petList = petList.Where(i => i.IDGender == cbGender.SelectedIndex & i.TypePetID == 1).ToList();
+            }
+
+            if (cbShelter.SelectedIndex != 0)
+            {
+                petList = petList.Where(i => i.AnimalShelteFullName == cbShelter.Text & i.TypePetID == 1).ToList();
+            }
+
+            if (cbSize.SelectedIndex != 0)
+            {
+                petList = petList.Where(i => i.IDSizePet == cbSize.SelectedIndex & i.TypePetID == 1).ToList();
             }
 
             listDog.ItemsSource = petList;
@@ -101,11 +122,11 @@ namespace Paws_of_Hope.Windows
 
         private void listDog_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var editDog = new EF.VW_PetTutor();
+            var editDog = new VW_PetTutor();
 
-            if (listDog.SelectedItem is EF.VW_PetTutor)
+            if (listDog.SelectedItem is VW_PetTutor)
             {
-                editDog = listDog.SelectedItem as EF.VW_PetTutor;
+                editDog = listDog.SelectedItem as VW_PetTutor;
             }
             InformationPetWindow informationPetWindow = new InformationPetWindow(editDog);
             this.Opacity = 0.2;
@@ -118,16 +139,16 @@ namespace Paws_of_Hope.Windows
         {
             if (e.Key == Key.Delete)
             {
-                if (listDog.SelectedItem is EF.VW_PetTutor)
+                if (listDog.SelectedItem is VW_PetTutor)
                 {
                     try
                     {
-                        var item = listDog.SelectedItem as EF.VW_PetTutor;
+                        var item = listDog.SelectedItem as VW_PetTutor;
                         var resultClick = MessageBox.Show("Вы уверены?", "Подтвердите удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (resultClick == MessageBoxResult.Yes)
                         {
-                            AppDate.Context.VW_PetTutor.Remove(item);
-                            AppDate.Context.SaveChanges();
+                            AppDate.context.VW_PetTutor.Remove(item);
+                            AppDate.context.SaveChanges();
                             MessageBox.Show("Питомец успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                             Filter();
                         }
@@ -143,16 +164,16 @@ namespace Paws_of_Hope.Windows
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (listDog.SelectedItem is EF.VW_PetTutor)
+            if (listDog.SelectedItem is VW_PetTutor)
             {
                 try
                 {
-                    var item = listDog.SelectedItem as EF.VW_PetTutor;
+                    var item = listDog.SelectedItem as VW_PetTutor;
                     var resultClick = MessageBox.Show("Вы уверены?", "Подтвердите удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (resultClick == MessageBoxResult.Yes)
                     {
-                        AppDate.Context.VW_PetTutor.Remove(item);
-                        AppDate.Context.SaveChanges();
+                        AppDate.context.VW_PetTutor.Remove(item);
+                        AppDate.context.SaveChanges();
                         MessageBox.Show("Питомец успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                         Filter();
                     }
@@ -214,6 +235,11 @@ namespace Paws_of_Hope.Windows
         }
 
         private void cbSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Filter();
         }

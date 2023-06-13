@@ -1,9 +1,11 @@
 ﻿using Microsoft.Win32;
 using Paws_of_Hope.Class;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Paws_of_Hope.Windows
@@ -50,56 +52,80 @@ namespace Paws_of_Hope.Windows
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
         }
 
         private void txtPetName_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }
         }
 
         private void txtPetAge_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
         }
 
         private void txtPetAge_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }
         }
 
         private void txtPetDisas_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
         }
 
         private void txtPetDisas_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }
         }
 
         private void txtPetHistory_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
         }
 
         private void txtPetHistory_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }
         }
 
         private void btnAddPhoto_Click(object sender, RoutedEventArgs e)
@@ -166,7 +192,7 @@ namespace Paws_of_Hope.Windows
                        // editPet.Photo = File.ReadAllBytes(pathPhoto);
                     }
 
-                    AppDate.Context.SaveChanges();
+                    AppDate.context.SaveChanges();
                     MessageBox.Show("Данные питомца успешно изменены", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                 }
@@ -195,12 +221,12 @@ namespace Paws_of_Hope.Windows
 
                         if (pathPhoto != null)
                         {
-                            //pet.PhotoPath = File.ReadAllBytes(pathPhoto);
+                            pet.Photo = File.ReadAllText(pathPhoto);
                         }
 
 
-                        AppDate.Context.VW_PetTutor.Add(pet);
-                        AppDate.Context.SaveChanges();
+                        AppDate.context.VW_PetTutor.Add(pet);
+                        AppDate.context.SaveChanges();
                         MessageBox.Show("Питомец успешно добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                         this.Close();
                     }

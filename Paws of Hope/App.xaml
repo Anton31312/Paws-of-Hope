@@ -291,6 +291,7 @@
             <Setter Property="Foreground" Value="#000000"/>
             <Setter Property="FontFamily" Value="Montserrat"/>
             <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
@@ -466,7 +467,7 @@
                 (GradientBrush.GradientStops)[1].(GradientStop.Color)"
                                           Storyboard.TargetName="Border">
                                     <EasingColorKeyFrame KeyTime="0"
-                                   Value="{StaticResource ControlMouseOverColor}" />
+                                   Value="{StaticResource ControlLightColor}" />
                                 </ColorAnimationUsingKeyFrames>
                             </Storyboard>
                         </VisualState>
@@ -477,19 +478,19 @@
                 (GradientBrush.GradientStops)[1].(GradientStop.Color)"
                                           Storyboard.TargetName="Border">
                                     <EasingColorKeyFrame KeyTime="0"
-                                   Value="{StaticResource DisabledControlDarkColor}" />
+                                   Value="{StaticResource ControlLightColor}" />
                                 </ColorAnimationUsingKeyFrames>
                                 <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).
                 (SolidColorBrush.Color)"
                                           Storyboard.TargetName="Arrow">
                                     <EasingColorKeyFrame KeyTime="0"
-                                   Value="{StaticResource DisabledForegroundColor}" />
+                                   Value="{StaticResource ControlLightColor}" />
                                 </ColorAnimationUsingKeyFrames>
                                 <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).
                 (GradientBrush.GradientStops)[1].(GradientStop.Color)"
                                           Storyboard.TargetName="Border">
                                     <EasingColorKeyFrame KeyTime="0"
-                                   Value="{StaticResource DisabledBorderDarkColor}" />
+                                   Value="{StaticResource ControlLightColor}" />
                                 </ColorAnimationUsingKeyFrames>
                             </Storyboard>
                         </VisualState>
@@ -501,7 +502,7 @@
                 (GradientBrush.GradientStops)[1].(GradientStop.Color)"
                                           Storyboard.TargetName="Border">
                                     <EasingColorKeyFrame KeyTime="0"
-                                   Value="{StaticResource ControlPressedColor}" />
+                                   Value="{StaticResource ControlLightColor}" />
                                 </ColorAnimationUsingKeyFrames>
                             </Storyboard>
                         </VisualState>
@@ -537,12 +538,6 @@
 
                     </Border.Background>
                 </Border>
-                <Border Grid.Column="0"
-                        CornerRadius="20">
-                    <Border.Background>
-                        <SolidColorBrush Color="{DynamicResource ControlLightColor}"/>
-                    </Border.Background>
-                </Border>
                 <Path x:Name="Arrow"
                         Grid.Column="1"
                         HorizontalAlignment="Center"
@@ -559,21 +554,20 @@
                  TargetType="{x:Type TextBox}">
             <Border x:Name="PART_ContentHost"
                     Focusable="False"
-                    Background="{TemplateBinding Background}" />
+                    Background="{TemplateBinding Background}"
+                    VerticalAlignment="Center"/>
         </ControlTemplate>
 
-        <Style x:Key="cbRound"
-       TargetType="{x:Type ComboBox}">
-            <Setter Property="SnapsToDevicePixels"
-          Value="true" />
-            <Setter Property="OverridesDefaultStyle"
-          Value="true" />
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
-          Value="Auto" />
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
-          Value="Auto" />
-            <Setter Property="ScrollViewer.CanContentScroll"
-          Value="true" />
+        <Style x:Key="cbRound" TargetType="{x:Type ComboBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="FontFamily" Value="Montserrat"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="BorderBrush" Value="#000000"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ComboBox}">
@@ -585,8 +579,7 @@
                                     <VisualState x:Name="Disabled">
                                         <Storyboard>
                                             <ColorAnimationUsingKeyFrames Storyboard.TargetName="PART_EditableTextBox"
-                                                Storyboard.TargetProperty="(TextElement.Foreground).
-                      (SolidColorBrush.Color)">
+                                                Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)">
                                                 <EasingColorKeyFrame KeyTime="0"
                                          Value="{StaticResource DisabledForegroundColor}" />
                                             </ColorAnimationUsingKeyFrames>
@@ -601,8 +594,7 @@
                                                 <DiscreteObjectKeyFrame KeyTime="0"
                                             Value="{x:Static Visibility.Visible}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames
-                      Storyboard.TargetProperty="(UIElement.Visibility)"
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
                                                  Storyboard.TargetName="ContentSite">
                                                 <DiscreteObjectKeyFrame KeyTime="0"
                                             Value="{x:Static Visibility.Hidden}" />
@@ -625,7 +617,7 @@
                             ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                             ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                             Margin="3,3,23,3"
-                            VerticalAlignment="Stretch"
+                            VerticalAlignment="Center"
                             HorizontalAlignment="Left">
                             </ContentPresenter>
                             <TextBox x:Name="PART_EditableTextBox"

@@ -69,7 +69,7 @@
                      TextWrapping="Wrap"
                      TextAlignment="Left"
                      FontSize="18"
-                     Foreground="LightGray"
+                     Foreground="#000000"
                      VerticalContentAlignment="Center"
                      BorderBrush="#000000"/>
         </StackPanel>
@@ -90,7 +90,7 @@
                      TextWrapping="Wrap"
                      TextAlignment="Left"
                      FontSize="18"
-                     Foreground="LightGray"
+                     Foreground="#000000"
                      VerticalContentAlignment="Center"/>
         </StackPanel>
 
@@ -125,7 +125,7 @@
                      TextWrapping="Wrap"
                      TextAlignment="Left"
                      FontSize="18"
-                     Foreground="LightGray"
+                     Foreground="#000000"
                      VerticalContentAlignment="Top"/>
         </StackPanel>
 
@@ -175,7 +175,7 @@
                      TextWrapping="Wrap"
                      TextAlignment="Left"
                      FontSize="18"
-                     Foreground="LightGray"
+                     Foreground="#000000"
                      VerticalContentAlignment="Top"/>
         </StackPanel>
 
@@ -235,9 +235,9 @@
                         Height="200"
                         Width="400"
                         Grid.RowSpan="5">
-                <Image x:Name="MainPhoto"
-                       Height="80">
-                </Image>
+                <Border.Background>
+                    <ImageBrush ImageSource="{Binding Photo, TargetNullValue=..\Resourse\PetAnim\Barni.jpg}"/>
+                </Border.Background>
             </Border>
         </StackPanel>
 

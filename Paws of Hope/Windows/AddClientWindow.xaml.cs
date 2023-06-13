@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Paws_of_Hope.Windows
@@ -37,7 +38,7 @@ namespace Paws_of_Hope.Windows
             InitializeComponent();
 
             //edit combobox
-            cbGender.ItemsSource = AppDate.Context.Gender.ToList();
+            cbGender.ItemsSource = AppDate.context.Gender.ToList();
             cbGender.DisplayMemberPath = "NameGender";
 
             //edit TItle and content button
@@ -62,70 +63,100 @@ namespace Paws_of_Hope.Windows
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
         }
 
         private void txtLastName_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }
         }
 
         private void txtFirstName_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
         }
 
         private void txtFirstName_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }
         }
 
         private void txtPatronymic_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
         }
 
         private void txtPatronymic_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }
         }
 
         private void txtPhone_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
         }
 
         private void txtPhone_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }
         }
 
         private void txtEmail_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (instance.Text == instance.Tag.ToString())
+            {
                 instance.Text = "";
+                instance.Foreground = Brushes.Black;
+            }
         }
 
         private void txtEmail_LostFocus(object sender, RoutedEventArgs e)
         {
             TextBox instance = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(instance.Text))
+            {
                 instance.Text = instance.Tag.ToString();
+                instance.Foreground = Brushes.LightGray;
+            }
         }
 
         private void btnAddPhoto_Click(object sender, RoutedEventArgs e)
@@ -207,7 +238,7 @@ namespace Paws_of_Hope.Windows
                         // editPet.Photo = File.ReadAllBytes(pathPhoto);
                     }
 
-                    AppDate.Context.SaveChanges();
+                    AppDate.context.SaveChanges();
                     MessageBox.Show("Данные клиента успешно изменены", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                 }
@@ -232,8 +263,8 @@ namespace Paws_of_Hope.Windows
                         client.IDStatusClient = cbStatusClient.SelectedIndex + 1;
                         client.IDGender = cbGender.SelectedIndex + 1;
 
-                        AppDate.Context.Client.Add(client);
-                        AppDate.Context.SaveChanges();
+                        AppDate.context.Client.Add(client);
+                        AppDate.context.SaveChanges();
                         MessageBox.Show("Клиент успешно добавлен!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                         this.Close();
                     }

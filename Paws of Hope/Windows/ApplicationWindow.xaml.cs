@@ -1,19 +1,11 @@
 ﻿using Paws_of_Hope.Class;
 using Paws_of_Hope.EF;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
 namespace Paws_of_Hope.Windows
 {
     /// <summary>
@@ -32,6 +24,7 @@ namespace Paws_of_Hope.Windows
             var status = AppDate.GetAllStatus();
             status.Insert(0, "По умолчанию");
             cbStatusClient.ItemsSource = status;
+            cbStatusClient.SelectedIndex = 0;
 
             Filter();
         }
@@ -41,12 +34,19 @@ namespace Paws_of_Hope.Windows
             if (listApplicationClient is null)
                 return;
 
-            appList = AppDate.Context.ExecutedApplication.ToList();
-            appList = appList.Where(i => i.Application.Client.LastName.ToLower().Contains(tbSearch.Text.ToLower()) ||
-            i.Application.Client.FirstName.ToLower().Contains(tbSearch.Text.ToLower()) || 
-            i.Application.Client.Patronymic.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            appList = AppDate.context.ExecutedApplication.ToList();
+            if (tbSearch.Text != $"ФИО клиента")
+            {
+                appList = appList.Where(i => i.Application.Client.LastName.ToLower().Contains(tbSearch.Text.ToLower()) ||
+                i.Application.Client.FirstName.ToLower().Contains(tbSearch.Text.ToLower()) ||
+                i.Application.Client.Patronymic.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            }
             TotalPet = AppDate.GetAllApplication().Count;
 
+            if (cbStatusClient.SelectedIndex != 0)
+            {
+                appList = appList.Where(i => i.Application.Client.IDStatusClient == cbStatusClient.SelectedIndex).ToList();
+            }
 
             listApplicationClient.ItemsSource = appList;
             txtCountApp.Text = $"{appList.Count} из {TotalPet}";

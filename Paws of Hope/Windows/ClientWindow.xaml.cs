@@ -19,7 +19,7 @@ namespace Paws_of_Hope.Windows
         public ClientWindow()
         {
             InitializeComponent();
-            listClient.ItemsSource = AppDate.Context.Client.ToList();
+            listClient.ItemsSource = AppDate.context.Client.ToList();
             var status = AppDate.GetAllStatus();
             status.Insert(0, "По умолчанию");
             cbStatusClient.ItemsSource = status;
@@ -38,10 +38,14 @@ namespace Paws_of_Hope.Windows
         {
             if (listClient is null)
                 return;
+
             List<Client> clientList = new List<Client>();
-            clientList = AppDate.Context.Client.ToList();
-            clientList = clientList.Where(i => i.LastName.ToLower().Contains(tbSearch.Text.ToLower()) ||
-            i.FirstName.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            clientList = AppDate.context.Client.ToList();
+            if (tbSearch.Text != "Введите ФИО")
+            {
+                clientList = clientList.Where(i => i.LastName.ToLower().Contains(tbSearch.Text.ToLower()) ||
+                i.FirstName.ToLower().Contains(tbSearch.Text.ToLower())).ToList();
+            }
 
             TotalPet = AppDate.GetAllClient().Count;
 
@@ -53,11 +57,11 @@ namespace Paws_of_Hope.Windows
 
         private void listClient_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var editClient= new EF.Client();
+            var editClient= new Client();
 
-            if (listClient.SelectedItem is EF.Client)
+            if (listClient.SelectedItem is Client)
             {
-                editClient = listClient.SelectedItem as EF.Client;
+                editClient = listClient.SelectedItem as Client;
             }
             AddClientWindow addClientWindow = new AddClientWindow(editClient);
             this.Opacity = 0.2;
@@ -84,16 +88,16 @@ namespace Paws_of_Hope.Windows
         {
             if (e.Key == Key.Delete)
             {
-                if (listClient.SelectedItem is EF.Client)
+                if (listClient.SelectedItem is Client)
                 {
                     try
                     {
-                        var item = listClient.SelectedItem as EF.Client;
+                        var item = listClient.SelectedItem as Client;
                         var resultClick = MessageBox.Show("Вы уверены?", "Подтвердите удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (resultClick == MessageBoxResult.Yes)
                         {
-                            AppDate.Context.Client.Remove(item);
-                            AppDate.Context.SaveChanges();
+                            AppDate.context.Client.Remove(item);
+                            AppDate.context.SaveChanges();
                             MessageBox.Show("Клиент успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                             Filter();
                         }
@@ -118,16 +122,16 @@ namespace Paws_of_Hope.Windows
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (listClient.SelectedItem is EF.Client)
+            if (listClient.SelectedItem is Client)
             {
                 try
                 {
-                    var item = listClient.SelectedItem as EF.Client;
+                    var item = listClient.SelectedItem as Client;
                     var resultClick = MessageBox.Show("Вы уверены?", "Подтвердите удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (resultClick == MessageBoxResult.Yes)
                     {
-                        AppDate.Context.Client.Remove(item);
-                        AppDate.Context.SaveChanges();
+                        AppDate.context.Client.Remove(item);
+                        AppDate.context.SaveChanges();
                         MessageBox.Show("Клиент успешно удален!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                         Filter();
                     }

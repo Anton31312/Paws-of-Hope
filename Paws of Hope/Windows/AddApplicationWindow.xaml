@@ -84,7 +84,7 @@
                      TextWrapping="Wrap"
                      TextAlignment="Left"
                      FontSize="18"
-                     Foreground="LightGray"
+                     Foreground="#000000"
                      VerticalContentAlignment="Center"
                      GotFocus="txtAgePet_GotFocus"
                      LostFocus="txtAgePet_LostFocus"/>
@@ -164,7 +164,7 @@
                      TextWrapping="Wrap"
                      TextAlignment="Left"
                      FontSize="18"
-                     Foreground="LightGray"
+                     Foreground="#000000"
                      VerticalContentAlignment="Top"
                      GotFocus="txtPetWish_GotFocus"
                      LostFocus="txtPetWish_LostFocus"/>

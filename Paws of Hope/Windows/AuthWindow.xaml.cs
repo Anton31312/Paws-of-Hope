@@ -44,7 +44,7 @@ namespace Paws_of_Hope.Windows
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             
-            var userAuth = AppDate.Context.Tutor.ToList().FirstOrDefault(i => i.Login == txtLogin.Text & i.Password == pbPassword.Password);
+            var userAuth = AppDate.context.Tutor.ToList().FirstOrDefault(i => i.Login == txtLogin.Text & i.Password == pbPassword.Password);
             if (userAuth != null)
             {
                 ConnectUser(userAuth.IDTutor, userAuth.Login, userAuth.Password);
